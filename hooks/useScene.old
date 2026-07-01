@@ -1,0 +1,13 @@
+"use client";
+
+import { useState } from "react";
+import type { Scene } from "@/types/scene";
+
+export function useScene() {
+  const [scene, setScene] = useState<Scene>("archive");
+
+  return {
+    scene,
+    setScene,
+  };
+}

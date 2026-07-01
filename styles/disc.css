@@ -1,0 +1,58 @@
+.disc-base {
+  position: relative;
+  overflow: hidden;
+  border-radius: 9999px;
+
+  background:
+    radial-gradient(
+      circle at center,
+      #fafafa 0%,
+      #e8e8e8 28%,
+      #d2d2d2 55%,
+      #bcbcbc 78%,
+      #efefef 100%
+    );
+
+  box-shadow:
+    inset 0 2px 3px rgba(255,255,255,.8),
+    inset 0 -3px 8px rgba(0,0,0,.15),
+    0 12px 24px rgba(0,0,0,.12);
+
+  transition: transform .35s ease;
+}
+
+.disc-holographic {
+
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+
+  background:
+    conic-gradient(
+      from 0deg,
+
+      transparent 0deg,
+
+      rgba(0,255,255,.28) 40deg,
+
+      transparent 70deg,
+
+      rgba(255,120,220,.28) 120deg,
+
+      transparent 170deg,
+
+      rgba(140,180,255,.22) 230deg,
+
+      transparent 280deg,
+
+      rgba(255,255,255,.18) 320deg,
+
+      transparent 360deg
+    );
+
+  opacity: .55;
+
+  mix-blend-mode: overlay;
+
+  animation: holographicShift 12s linear infinite;
+}

@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+:root {
+  /* Base */
+  --background: #f8f6f2;
+  --foreground: #1f1f1f;
+
+  /* Brand */
+  --accent-blue: #6ca8ff;
+  --accent-pink: #ff69c8;
+
+  /* Y2K */
+  --chrome: #d7d7d7;
+  --chrome-dark: #9f9f9f;
+  --holographic: #d9f5ff;
+
+  /* UI */
+  --panel: rgba(255, 255, 255, 0.72);
+  --border: rgba(0, 0, 0, 0.12);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-pink: var(--accent-pink);
+
+  --color-chrome: var(--chrome);
+  --color-chrome-dark: var(--chrome-dark);
+  --color-holographic: var(--holographic);
+
+  --color-panel: var(--panel);
+  --color-border: var(--border);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+@import "../styles/disc.css";
