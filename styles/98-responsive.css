@@ -1,0 +1,251 @@
+/* ==========================================================
+   GLOBAL RESPONSIVE CLEANUP
+========================================================== */
+
+@media(max-width:900px){
+
+  .opening-screen{
+    padding:20px;
+  }
+
+  .opening-header{
+    flex-direction:column;
+  }
+
+  .viewer-track{
+    align-items:flex-start;
+  }
+
+  .viewer-window{
+    margin:0;
+  }
+
+  .viewer-grid-two,
+  .archive-grid-two{
+    grid-template-columns:1fr;
+  }
+
+  .hero-main{
+    grid-template-columns:1fr;
+  }
+
+  .hero-side{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+
+  .archive-metadata{
+    grid-template-columns:1fr;
+  }
+
+  .metadata-divider{
+    display:none;
+  }
+
+  .location-body,
+  .dress-layout,
+  .rsvp-body{
+    grid-template-columns:1fr;
+  }
+
+  .gps-box{
+    order:-1;
+  }
+
+}
+
+@media(max-width:700px){
+
+  .opening-screen{
+    padding:12px;
+    gap:16px;
+  }
+
+  .viewer-title{
+    font-size:36px;
+  }
+
+  .viewer-track h2{
+    font-size:18px;
+  }
+
+  .window-body{
+    padding:16px;
+    gap:16px;
+  }
+
+  .window-titlebar{
+    height:30px;
+  }
+
+  .window-status{
+    height:auto;
+    min-height:28px;
+
+    flex-wrap:wrap;
+    gap:8px;
+
+    padding:8px 10px;
+  }
+
+  .hero-title{
+    font-size:32px;
+  }
+
+  .hero-subtitle,
+  .hero-description{
+    font-size:16px;
+  }
+
+  .hero-side{
+    grid-template-columns:1fr;
+  }
+
+  .hero-terminal{
+    padding:14px;
+  }
+
+  .hero-terminal p{
+    font-size:13px;
+  }
+
+  .hero-quote{
+    padding:14px;
+  }
+
+  .hero-quote blockquote{
+    font-size:16px;
+  }
+
+  .metadata-row{
+    padding:14px;
+  }
+
+  .metadata-value{
+    font-size:18px;
+  }
+
+  .system-grid{
+    grid-template-columns:110px minmax(0,1fr);
+  }
+
+  .system-label,
+  .system-value{
+    padding:10px;
+  }
+
+  .system-value{
+    font-size:14px;
+  }
+
+  .date-display,
+  .time-display,
+  .countdown-display{
+    min-height:180px;
+    padding:20px;
+  }
+
+  .date-day{
+    font-size:56px;
+  }
+
+  .time-clock{
+    font-size:40px;
+  }
+
+  .countdown-number{
+    font-size:60px;
+  }
+
+  .location-body,
+  .dress-layout,
+  .rsvp-body{
+    padding:16px;
+    gap:20px;
+  }
+
+  .location-title{
+    font-size:26px;
+  }
+
+  .location-address,
+  .rsvp-text,
+  .dress-info p{
+    font-size:16px;
+  }
+
+  .palette-grid{
+    grid-template-columns:1fr;
+  }
+
+  .rsvp-title{
+    font-size:24px;
+  }
+
+  .archive-footer{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+}
+
+@media(max-width:420px){
+
+  .viewer-title{
+    font-size:30px;
+  }
+
+  .viewer-label,
+  .viewer-track span{
+    font-size:11px;
+  }
+
+  .window-title{
+    max-width:190px;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+
+  .window-buttons{
+    gap:2px;
+  }
+
+  .hero-title{
+    font-size:28px;
+  }
+
+  .hero-chip,
+  .location-chip,
+  .rsvp-chip{
+    font-size:10px;
+  }
+
+  .module-header,
+  .system-header{
+    padding:0 10px;
+    font-size:10px;
+  }
+
+  .system-grid{
+    grid-template-columns:92px minmax(0,1fr);
+  }
+
+  .system-label,
+  .system-value{
+    font-size:10px;
+  }
+
+  .metadata-value{
+    font-size:16px;
+  }
+
+  .pixel-button,
+  .rsvp-button,
+  .location-map{
+    width:100%;
+  }
+
+}

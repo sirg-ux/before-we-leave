@@ -1,47 +1,697 @@
 @import "tailwindcss";
-
-:root {
-  /* Base */
-  --background: #f8f6f2;
-  --foreground: #1f1f1f;
-
-  /* Brand */
-  --accent-blue: #6ca8ff;
-  --accent-pink: #ff69c8;
-
-  /* Y2K */
-  --chrome: #d7d7d7;
-  --chrome-dark: #9f9f9f;
-  --holographic: #d9f5ff;
-
-  /* UI */
-  --panel: rgba(255, 255, 255, 0.72);
-  --border: rgba(0, 0, 0, 0.12);
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-
-  --color-accent-blue: var(--accent-blue);
-  --color-accent-pink: var(--accent-pink);
-
-  --color-chrome: var(--chrome);
-  --color-chrome-dark: var(--chrome-dark);
-  --color-holographic: var(--holographic);
-
-  --color-panel: var(--panel);
-  --color-border: var(--border);
-
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
-}
-
 @import "../styles/disc.css";
+@import "../styles/98.css";
+
+/* ==========================================================
+   MEMORY ARCHIVE
+   GLOBAL STYLES
+========================================================== */
+
+/* ==========================================================
+   DESIGN TOKENS
+========================================================== */
+
+:root{
+
+  /* Base */
+
+  --background:#f3f3f3;
+  --foreground:#202020;
+
+  /* Accent */
+
+  --accent-blue:#4d6cff;
+  --accent-pink:#ff69c8;
+
+  /* Neutral */
+
+  --chrome:#d4d0c8;
+  --chrome-dark:#808080;
+
+  --border:#a0a0a0;
+
+  --panel:#ffffff;
+
+}
+
+/* ==========================================================
+   TAILWIND THEME
+========================================================== */
+
+@theme inline{
+
+  --color-background:var(--background);
+  --color-foreground:var(--foreground);
+
+  --color-accent-blue:var(--accent-blue);
+  --color-accent-pink:var(--accent-pink);
+
+  --color-chrome:var(--chrome);
+  --color-chrome-dark:var(--chrome-dark);
+
+  --color-panel:var(--panel);
+
+  --color-border:var(--border);
+
+  --font-sans:var(--font-geist-sans);
+  --font-mono:var(--font-geist-mono);
+
+}
+
+/* ==========================================================
+   RESET
+========================================================== */
+
+*,
+*::before,
+*::after{
+
+  box-sizing:border-box;
+
+}
+
+html{
+
+  width:100%;
+
+  height:100%;
+
+  overflow:hidden;
+
+  color-scheme:light;
+
+}
+
+body{
+
+  width:100%;
+
+  height:100%;
+
+  margin:0;
+
+  overflow:hidden;
+
+  background:var(--background);
+
+  color:var(--foreground);
+
+  font-family:
+      var(--font-geist-sans),
+      Arial,
+      Helvetica,
+      sans-serif;
+
+  text-rendering:optimizeLegibility;
+
+  -webkit-font-smoothing:antialiased;
+
+  -moz-osx-font-smoothing:grayscale;
+
+}
+
+button{
+
+  font:inherit;
+
+  cursor:pointer;
+
+}
+
+input,
+textarea,
+select{
+
+  font:inherit;
+
+}
+
+a{
+
+  color:inherit;
+
+  text-decoration:none;
+
+}
+
+img{
+
+  display:block;
+
+  max-width:100%;
+
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+
+  margin:0;
+
+}
+
+::selection{
+
+  background:rgba(77,108,255,.25);
+
+}
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+::-webkit-scrollbar{
+
+  width:8px;
+
+}
+
+::-webkit-scrollbar-track{
+
+  background:transparent;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+  background:#9a9a9a;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+  background:#6f6f6f;
+
+}
+
+/* ==========================================================
+   SHARED LAYOUT
+========================================================== */
+
+main{
+
+  width:100%;
+
+  height:100%;
+
+}
+
+section{
+
+  position:relative;
+
+}
+
+.archive-page{
+
+  width:100%;
+
+  height:100%;
+
+}
+
+.archive-window{
+
+  position:relative;
+
+}
+
+.archive-body{
+
+  position:relative;
+
+}
+
+.archive-grid{
+
+  display:grid;
+
+  gap:24px;
+
+}
+
+.archive-grid-2{
+
+  grid-template-columns:
+
+      repeat(2,minmax(0,1fr));
+
+}
+
+@media(max-width:900px){
+
+.archive-grid-2{
+
+  grid-template-columns:1fr;
+
+}
+
+}
+
+/* ==========================================================
+   FADE
+========================================================== */
+
+@keyframes archiveFade{
+
+  from{
+
+    opacity:0;
+
+    transform:translateY(8px);
+
+  }
+
+  to{
+
+    opacity:1;
+
+    transform:none;
+
+  }
+
+}
+
+.archive-fade{
+
+  animation:
+
+    archiveFade
+
+    .28s
+
+    ease-out;
+
+}
+
+@keyframes sceneFade{
+
+  from{
+
+    opacity:0;
+
+  }
+
+  to{
+
+    opacity:1;
+
+  }
+
+}
+
+.scene-fade{
+
+  animation:
+
+    sceneFade
+
+    .35s
+
+    ease;
+
+}
+
+@keyframes scaleFade{
+
+  from{
+
+    opacity:0;
+
+    transform:scale(.96);
+
+  }
+
+  to{
+
+    opacity:1;
+
+    transform:scale(1);
+
+  }
+
+}
+
+.scale-fade{
+
+  animation:
+
+    scaleFade
+
+    .35s
+
+    ease;
+
+}
+
+/* ==========================================================
+   CRT
+========================================================== */
+
+.archive-crt{
+
+  position:fixed;
+
+  inset:0;
+
+  pointer-events:none;
+
+  z-index:2;
+
+  opacity:.12;
+
+  background:
+
+    repeating-linear-gradient(
+
+      to bottom,
+
+      rgba(255,255,255,.05) 0px,
+
+      rgba(255,255,255,.05) 1px,
+
+      transparent 2px,
+
+      transparent 4px
+
+    );
+
+  mix-blend-mode:soft-light;
+
+}
+
+@keyframes crtFlash{
+
+  0%{
+
+    opacity:0;
+
+  }
+
+  35%{
+
+    opacity:.08;
+
+  }
+
+  100%{
+
+    opacity:0;
+
+  }
+
+}
+
+.crt-flash{
+
+  animation:
+
+    crtFlash
+
+    .16s
+
+    ease-out;
+
+}
+
+/* ==========================================================
+   BOOT FLASH
+========================================================== */
+
+@keyframes bootFlash{
+
+  0%{
+
+    opacity:0;
+
+  }
+
+  45%{
+
+    opacity:.08;
+
+  }
+
+  100%{
+
+    opacity:0;
+
+  }
+
+}
+
+.boot-flash{
+
+  position:fixed;
+
+  inset:0;
+
+  background:white;
+
+  pointer-events:none;
+
+  z-index:999;
+
+  animation:
+
+    bootFlash
+
+    .22s
+
+    ease-out;
+
+}
+
+/* ==========================================================
+   BACKGROUND NOISE
+========================================================== */
+
+.archive-noise{
+
+  position:relative;
+
+}
+
+.archive-noise::before{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  pointer-events:none;
+
+  opacity:.18;
+
+  background-image:
+
+    radial-gradient(
+
+      circle at 20% 20%,
+
+      rgba(255,255,255,.18) 1px,
+
+      transparent 1px
+
+    ),
+
+    radial-gradient(
+
+      circle at 70% 30%,
+
+      rgba(255,255,255,.12) 1px,
+
+      transparent 1px
+
+    ),
+
+    radial-gradient(
+
+      circle at 40% 80%,
+
+      rgba(255,255,255,.10) 1px,
+
+      transparent 1px
+
+    );
+
+  background-size:
+
+      120px 120px,
+
+      180px 180px,
+
+      150px 150px;
+
+}
+
+/* ==========================================================
+   FLOATING BACKGROUND
+========================================================== */
+
+@keyframes floatOne{
+
+  0%{
+
+    transform:translate(0,0);
+
+  }
+
+  50%{
+
+    transform:translate(70px,-40px);
+
+  }
+
+  100%{
+
+    transform:translate(0,0);
+
+  }
+
+}
+
+@keyframes floatTwo{
+
+  0%{
+
+    transform:translate(0,0);
+
+  }
+
+  50%{
+
+    transform:translate(-60px,60px);
+
+  }
+
+  100%{
+
+    transform:translate(0,0);
+
+  }
+
+}
+
+.float-one{
+
+  animation:
+
+    floatOne
+
+    20s
+
+    ease-in-out
+
+    infinite;
+
+}
+
+.float-two{
+
+  animation:
+
+    floatTwo
+
+    24s
+
+    ease-in-out
+
+    infinite;
+
+}
+
+/* ==========================================================
+   SCAN LINE
+========================================================== */
+
+@keyframes archiveScan{
+
+  from{
+
+    transform:translateY(-120%);
+
+  }
+
+  to{
+
+    transform:translateY(120vh);
+
+  }
+
+}
+
+.archive-scan{
+
+  position:relative;
+
+  overflow:hidden;
+
+}
+
+.archive-scan::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+
+  right:0;
+
+  height:120px;
+
+  pointer-events:none;
+
+  background:
+
+    linear-gradient(
+
+      to bottom,
+
+      transparent,
+
+      rgba(255,255,255,.08),
+
+      rgba(77,108,255,.08),
+
+      transparent
+
+    );
+
+  animation:
+
+    archiveScan
+
+    10s
+
+    linear
+
+    infinite;
+
+}
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media(prefers-reduced-motion:reduce){
+
+*,
+*::before,
+*::after{
+
+  animation:none !important;
+
+  transition:none !important;
+
+  scroll-behavior:auto !important;
+
+}
+
+}

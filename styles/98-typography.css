@@ -1,0 +1,221 @@
+/* ==========================================================
+   TYPOGRAPHY — FLAT MAGENTA Y2K
+========================================================== */
+
+:root {
+  --ui-label: #685d69;
+  --ui-label-dark: #d9c9d2;
+  --ui-copy: #302735;
+  --ui-copy-dark: #efe1e8;
+}
+
+/* ==========================================================
+   TECHNICAL LABELS
+========================================================== */
+
+.hero-version,
+.panel-label,
+.metadata-label,
+.system-label,
+.countdown-kicker,
+.countdown-loader-label,
+.location-note,
+.rsvp-note,
+.rsvp-chip,
+.location-chip,
+.dress-note li,
+.archive-info-kicker,
+.archive-info-data span,
+.archive-stage-copy span,
+.archive-open-hint,
+.archive-scene-brand p,
+.archive-scene-status span,
+.archive-scene-bar,
+.archive-scene-footer,
+.drive-brand p,
+.drive-code span,
+.drive-code small,
+.drive-windowbar,
+.drive-track-panel-head,
+.drive-footer,
+.track-brand p,
+.track-number span,
+.track-windowbar,
+.track-label-row,
+.track-kicker,
+.track-file-data span,
+.track-footer,
+.boot-kicker,
+.boot-console-bar,
+.boot-progress-meta,
+.boot-console-footer,
+.loading-console-bar,
+.loading-heading > span,
+.loading-progress-meta,
+.loading-console-footer,
+.ending-windowbar,
+.ending-header > span,
+.ending-message-bar,
+.ending-footer,
+.gallery-windowbar,
+.gallery-header > span,
+.gallery-footer,
+.gallery-status,
+.gallery-empty-title {
+  font-family: var(--font-geist-mono), monospace;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* ==========================================================
+   MAIN HELPERS
+========================================================== */
+
+.hero-description,
+.location-address,
+.dress-info p,
+.rsvp-text,
+.track-description,
+.boot-brand p,
+.loading-heading p,
+.ending-signoff p,
+.gallery-header p,
+.countdown-loader p,
+.gallery-empty-text {
+  color: var(--ui-copy);
+
+  font-family: var(--font-vt323), monospace;
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+}
+
+/* ==========================================================
+   OPENING CONTENT
+========================================================== */
+
+.hero-subtitle,
+.countdown-kicker,
+.location-chip,
+.rsvp-chip {
+  color: var(--accent-dark);
+
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.hero-title,
+.rsvp-title,
+.location-title,
+.dress-info h3 {
+  color: var(--ink);
+
+  font-family: var(--font-press-start), monospace;
+  font-weight: 400;
+}
+
+/* ==========================================================
+   DATE / TIME / SYSTEM
+========================================================== */
+
+.metadata-label,
+.system-label {
+  color: var(--ui-label);
+
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.metadata-value,
+.system-value,
+.panel-value,
+.date-day,
+.time-clock,
+.archive-info-data strong,
+.track-file-data strong {
+  font-family: var(--font-vt323), monospace;
+}
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.archive-info-actions button,
+.archive-control-button,
+.archive-enter-button,
+.drive-button,
+.track-button,
+.rsvp-button,
+.location-map,
+.rsvp-modal-cancel,
+.rsvp-modal-submit {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.archive-info-actions .archive-open-button,
+.archive-enter-button,
+.drive-button-primary,
+.track-button-primary,
+.rsvp-button,
+.rsvp-modal-submit {
+  font-family: var(--font-press-start), monospace;
+  font-size: 8px;
+}
+
+/* ==========================================================
+   DARK PANELS
+========================================================== */
+
+.archive-info-kicker,
+.archive-info-data span,
+.drive-track-panel-head,
+.drive-track-panel-head span:last-child,
+.track-windowbar > span,
+.drive-windowbar > span,
+.boot-console-footer,
+.loading-console-footer,
+.ending-windowbar,
+.ending-message-bar,
+.ending-footer,
+.gallery-windowbar,
+.gallery-footer,
+.gallery-status,
+.archive-scene-footer,
+.drive-footer,
+.track-footer {
+  color: var(--ui-label-dark);
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 640px) {
+  .hero-description,
+  .location-address,
+  .dress-info p,
+  .rsvp-text,
+  .track-description,
+  .boot-brand p,
+  .loading-heading p,
+  .ending-signoff p,
+  .gallery-header p,
+  .countdown-loader p,
+  .gallery-empty-text {
+    font-size: 22px;
+  }
+
+  .hero-subtitle,
+  .countdown-kicker,
+  .location-chip,
+  .rsvp-chip {
+    font-size: 10px;
+  }
+}

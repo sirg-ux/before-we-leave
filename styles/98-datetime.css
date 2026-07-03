@@ -1,0 +1,274 @@
+/* ==========================================================
+   DATE / TIME / COUNTDOWN — FLAT MAGENTA Y2K
+========================================================== */
+
+/* ==========================================================
+   DATE + TIME
+========================================================== */
+
+.date-display,
+.time-display {
+  min-height: 220px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 28px 22px;
+
+  background: #f8f6f2;
+}
+
+.date-day,
+.time-clock {
+  margin: 0;
+
+  color: #211a29;
+
+  font-family: var(--font-vt323), monospace;
+  font-size: 94px;
+  font-weight: 400;
+  line-height: 0.72;
+
+  text-shadow: 3px 3px 0 rgba(216, 28, 120, 0.16);
+}
+
+.date-month {
+  margin-top: 16px;
+
+  color: var(--accent-dark);
+
+  font-family: var(--font-press-start), monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+}
+
+.date-year {
+  margin-top: 12px;
+
+  color: #776d78;
+
+  font-family: var(--font-press-start), monospace;
+  font-size: 8px;
+  line-height: 1.5;
+  letter-spacing: 0.12em;
+}
+
+.time-zone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 20px;
+  padding: 8px 10px;
+
+  background: #231d29;
+  color: #f7eaf0;
+
+  border: 1px solid #493a4b;
+  border-bottom: 2px solid var(--accent);
+
+  font-family: var(--font-press-start), monospace;
+  font-size: 8px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+}
+
+/* ==========================================================
+   COUNTDOWN
+========================================================== */
+
+.countdown-card {
+  overflow: hidden;
+
+  background: #f8f6f2;
+
+  border: 2px solid #ffffff;
+  outline: 1px solid #514957;
+
+  box-shadow: 4px 4px 0 rgba(35, 29, 41, 0.22);
+}
+
+.countdown-card-header {
+  padding: 22px 28px 19px;
+
+  background: #f8f6f2;
+
+  border-bottom: 1px solid #b9afb9;
+}
+
+.countdown-kicker {
+  color: var(--accent-dark);
+
+  font-family: var(--font-press-start), monospace;
+  font-size: 8px;
+  line-height: 1.5;
+  letter-spacing: 0.14em;
+}
+
+.countdown-card-header h2 {
+  margin: 16px 0 0;
+
+  color: #211a29;
+
+  font-family: var(--font-press-start), monospace;
+  font-size: clamp(18px, 2.2vw, 27px);
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.countdown-card-body {
+  padding: 30px 28px 26px;
+
+  background: #f8f6f2;
+}
+
+.countdown-units {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.countdown-unit {
+  position: relative;
+
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 0 16px;
+}
+
+.countdown-unit:not(:last-child)::after {
+  content: "";
+
+  position: absolute;
+  top: 5px;
+  right: 0;
+  bottom: 5px;
+
+  width: 1px;
+
+  background: #c9bec7;
+}
+
+.countdown-unit strong {
+  color: var(--accent);
+
+  font-family: var(--font-vt323), monospace;
+  font-size: clamp(60px, 7vw, 86px);
+  font-weight: 400;
+  line-height: 0.72;
+
+  text-shadow: 3px 3px 0 rgba(35, 29, 41, 0.16);
+}
+
+.countdown-unit span {
+  margin-top: 17px;
+
+  color: #776d78;
+
+  font-family: var(--font-press-start), monospace;
+  font-size: 8px;
+  line-height: 1.5;
+  letter-spacing: 0.13em;
+}
+
+/* ==========================================================
+   PROGRESS
+========================================================== */
+
+.countdown-loader {
+  margin-top: 34px;
+}
+
+.countdown-loader-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+
+  color: #6b606c;
+
+  font-family: var(--font-press-start), monospace;
+  font-size: 8px;
+  line-height: 1.5;
+  letter-spacing: 0.09em;
+}
+
+.countdown-progress {
+  height: 14px;
+
+  margin-top: 15px;
+  padding: 2px;
+
+  background: #e2dce1;
+
+  border: 1px solid #9d909c;
+}
+
+.countdown-progress span {
+  display: block;
+
+  width: 90%;
+  height: 100%;
+
+  background: var(--accent);
+
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.38);
+}
+
+.countdown-loader p {
+  margin: 14px 0 0;
+
+  color: #655b66;
+
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 700px) {
+  .date-display,
+  .time-display {
+    min-height: 190px;
+  }
+
+  .date-day,
+  .time-clock {
+    font-size: 78px;
+  }
+
+  .countdown-card-header {
+    padding: 18px 16px;
+  }
+
+  .countdown-card-body {
+    padding: 24px 16px 20px;
+  }
+
+  .countdown-units {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 0;
+  }
+
+  .countdown-unit:nth-child(2)::after {
+    display: none;
+  }
+
+  .countdown-unit strong {
+    font-size: 68px;
+  }
+
+  .countdown-loader {
+    margin-top: 28px;
+  }
+}

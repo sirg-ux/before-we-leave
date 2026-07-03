@@ -1,0 +1,231 @@
+/* ==========================================================
+   SYSTEM INFORMATION — FLAT MAGENTA Y2K
+========================================================== */
+
+.archive-metadata {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  overflow: hidden;
+
+  background: #f8f6f2;
+
+  border: 2px solid #ffffff;
+  outline: 1px solid #514957;
+
+  box-shadow: 4px 4px 0 rgba(35, 29, 41, 0.22);
+}
+
+.metadata-divider {
+  display: none;
+}
+
+.metadata-row {
+  position: relative;
+
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 18px 20px;
+
+  background: #f8f6f2;
+}
+
+.metadata-row:not(:last-child)::after {
+  content: "";
+
+  position: absolute;
+  top: 14px;
+  right: 0;
+  bottom: 14px;
+
+  width: 1px;
+
+  background: #c9bec7;
+}
+
+.metadata-label {
+  color: #776d78;
+
+  font-family: var(--font-press-start), monospace;
+  font-size: 8px;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+}
+
+.metadata-value {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  min-width: 0;
+
+  color: #27202e;
+
+  font-family: var(--font-vt323), monospace;
+  font-size: 29px;
+  line-height: 0.95;
+}
+
+.metadata-led {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 9px;
+
+  border-radius: 50%;
+
+  background: var(--success);
+
+  box-shadow: 0 0 8px rgba(36, 200, 121, 0.8);
+}
+
+/* ==========================================================
+   SYSTEM TABLE
+========================================================== */
+
+.archive-system {
+  overflow: hidden;
+
+  background: #f8f6f2;
+
+  border: 2px solid #ffffff;
+  outline: 1px solid #514957;
+
+  box-shadow: 4px 4px 0 rgba(35, 29, 41, 0.22);
+}
+
+.system-header {
+  min-height: 37px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 10px 14px;
+
+  background: #231d29;
+  color: #ffffff;
+
+  border-bottom: 2px solid var(--accent);
+
+  font-family: var(--font-press-start), monospace;
+  font-size: 8px;
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+}
+
+.system-grid {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+
+  background: #f8f6f2;
+}
+
+.system-label,
+.system-value {
+  min-width: 0;
+
+  padding: 14px 18px;
+
+  border-bottom: 1px solid #c9bec7;
+}
+
+.system-label {
+  display: flex;
+  align-items: center;
+
+  background: #eee7eb;
+
+  border-right: 1px solid #c9bec7;
+
+  color: #6e6370;
+
+  font-family: var(--font-press-start), monospace;
+  font-size: 8px;
+  line-height: 1.5;
+}
+
+.system-value {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: #f8f6f2;
+
+  color: #27202e;
+
+  font-family: var(--font-vt323), monospace;
+  font-size: 27px;
+  line-height: 0.95;
+}
+
+.system-led {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 9px;
+
+  border-radius: 50%;
+
+  background: var(--success);
+
+  box-shadow: 0 0 8px rgba(36, 200, 121, 0.78);
+}
+
+.system-grid > :nth-last-child(-n + 2) {
+  border-bottom: 0;
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 900px) {
+  .archive-metadata {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .metadata-row:nth-child(2)::after {
+    display: none;
+  }
+
+  .metadata-row:nth-child(-n + 2) {
+    border-bottom: 1px solid #c9bec7;
+  }
+}
+
+@media (max-width: 620px) {
+  .archive-metadata {
+    grid-template-columns: 1fr;
+  }
+
+  .metadata-row {
+    padding: 15px 16px;
+  }
+
+  .metadata-row::after {
+    display: none;
+  }
+
+  .metadata-row:not(:last-child) {
+    border-bottom: 1px solid #c9bec7;
+  }
+
+  .metadata-value {
+    font-size: 26px;
+  }
+
+  .system-grid {
+    grid-template-columns: 120px minmax(0, 1fr);
+  }
+
+  .system-label,
+  .system-value {
+    padding: 12px;
+  }
+
+  .system-value {
+    font-size: 24px;
+  }
+}

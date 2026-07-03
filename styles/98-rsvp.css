@@ -1,0 +1,602 @@
+/* ==========================================================
+   RSVP CARD + RSVP CONSOLE
+========================================================== */
+
+/* ==========================================================
+   OUTER RSVP CARD
+========================================================== */
+
+.archive-rsvp {
+  overflow: hidden;
+
+  background: var(--paper);
+
+  border: 2px solid #ffffff;
+  outline: 1px solid #514957;
+
+  box-shadow: 4px 4px 0 rgba(35, 29, 41, 0.2);
+}
+
+.rsvp-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 28px;
+
+  padding: 28px;
+
+  background:
+    linear-gradient(rgba(216, 28, 120, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(216, 28, 120, 0.045) 1px, transparent 1px),
+    var(--paper);
+
+  background-size: 26px 26px;
+}
+
+.rsvp-copy {
+  min-width: 0;
+}
+
+.rsvp-chip {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 30px;
+  padding: 0 11px;
+
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+
+  border: 1px solid #dfafc5;
+
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.rsvp-title {
+  margin: 16px 0 0;
+
+  color: var(--ink);
+
+  font-family: var(--font-press-start), monospace;
+  font-size: clamp(17px, 2.2vw, 25px);
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.rsvp-text {
+  margin: 15px 0 0;
+
+  color: #302735;
+
+  font-family: var(--font-vt323), monospace;
+  font-size: 26px;
+  line-height: 1.1;
+}
+
+.rsvp-note {
+  margin: 16px 0 0;
+
+  color: #685d69;
+
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.rsvp-actions {
+  width: min(280px, 100%);
+
+  display: grid;
+  gap: 10px;
+  justify-items: stretch;
+}
+
+.rsvp-button {
+  min-height: 52px;
+
+  padding: 12px 16px;
+
+  background: var(--accent);
+  color: #ffffff;
+
+  border: 1px solid #8d0a49;
+
+  box-shadow: 4px 4px 0 rgba(35, 29, 41, 0.22);
+
+  font-family: var(--font-press-start), monospace;
+  font-size: 8px;
+  line-height: 1.4;
+
+  cursor: pointer;
+}
+
+.rsvp-button:hover {
+  background: var(--accent-dark);
+}
+
+.rsvp-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 rgba(35, 29, 41, 0.22);
+}
+
+.rsvp-status {
+  min-height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 10px;
+
+  background: var(--panel-dark);
+  color: #e9dce4;
+
+  border: 1px solid #463746;
+
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+
+/* ==========================================================
+   MODAL BACKDROP
+========================================================== */
+
+.rsvp-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+
+  display: grid;
+  place-items: center;
+
+  padding: 20px;
+
+  background: rgba(15, 10, 18, 0.78);
+  backdrop-filter: blur(2px);
+}
+
+.rsvp-modal {
+  width: min(700px, 100%);
+
+  overflow: hidden;
+
+  background: var(--paper);
+
+  border: 2px solid #ffffff;
+  outline: 2px solid #302736;
+
+  box-shadow:
+    10px 10px 0 rgba(0, 0, 0, 0.5),
+    0 0 0 5px rgba(216, 28, 120, 0.22);
+}
+
+.rsvp-modal-bar {
+  min-height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+
+  padding: 10px 16px;
+
+  background: var(--accent);
+  color: #ffffff;
+
+  border-bottom: 2px solid #5f0832;
+
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.rsvp-modal-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rsvp-modal-orb {
+  width: 16px;
+  height: 16px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+
+  font-size: 8px;
+}
+
+.rsvp-modal-close {
+  width: 30px;
+  height: 30px;
+
+  display: grid;
+  place-items: center;
+
+  background: #ffffff;
+  color: var(--panel-dark);
+
+  border: 1px solid #ffffff;
+
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 20px;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.rsvp-modal-close:hover {
+  background: var(--panel-dark);
+  color: #ffffff;
+}
+
+/* ==========================================================
+   FORM
+========================================================== */
+
+.rsvp-modal-body {
+  display: grid;
+  gap: 22px;
+
+  padding: 30px;
+
+  background:
+    linear-gradient(rgba(216, 28, 120, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(216, 28, 120, 0.055) 1px, transparent 1px),
+    var(--paper);
+
+  background-size: 26px 26px;
+}
+
+.rsvp-modal-heading {
+  text-align: center;
+}
+
+.rsvp-modal-heading > p {
+  margin: 0;
+
+  color: var(--accent-dark);
+
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.rsvp-modal-heading h2 {
+  margin: 14px 0 0;
+
+  color: var(--ink);
+
+  font-family: var(--font-press-start), monospace;
+  font-size: clamp(23px, 4vw, 34px);
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.rsvp-modal-heading > span {
+  display: block;
+
+  margin-top: 15px;
+
+  color: #302735;
+
+  font-family: var(--font-vt323), monospace;
+  font-size: 25px;
+  line-height: 1.1;
+}
+
+.rsvp-console-status {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  background: var(--terminal);
+
+  border: 1px solid #463746;
+
+  box-shadow: 4px 4px 0 rgba(35, 29, 41, 0.18);
+}
+
+.rsvp-console-status > div {
+  min-width: 0;
+
+  display: grid;
+  gap: 8px;
+
+  padding: 14px;
+
+  border-right: 1px solid #463746;
+}
+
+.rsvp-console-status > div:last-child {
+  border-right: 0;
+}
+
+.rsvp-console-status span {
+  color: #e5b7cf;
+
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.rsvp-console-status strong {
+  overflow: hidden;
+
+  color: #aef0cc;
+
+  font-family: var(--font-vt323), monospace;
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rsvp-status-ready {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.rsvp-status-ready i {
+  width: 8px;
+  height: 8px;
+
+  flex: 0 0 8px;
+
+  border-radius: 50%;
+
+  background: var(--success);
+
+  box-shadow: 0 0 8px rgba(36, 200, 121, 0.8);
+}
+
+.rsvp-fields {
+  display: grid;
+  gap: 15px;
+}
+
+.rsvp-fields label {
+  display: grid;
+  gap: 8px;
+}
+
+.rsvp-fields label > span {
+  color: var(--accent-dark);
+
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.rsvp-fields input {
+  width: 100%;
+  min-height: 54px;
+
+  padding: 0 16px;
+
+  background: #ffffff;
+  color: var(--ink);
+
+  border: 1px solid #9f929e;
+  box-shadow: inset 2px 2px 0 rgba(35, 29, 41, 0.08);
+
+  font-family: var(--font-vt323), monospace;
+  font-size: 26px;
+  line-height: 1;
+}
+
+.rsvp-fields input::placeholder {
+  color: #a49aa5;
+}
+
+.rsvp-fields input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.rsvp-error {
+  margin: -4px 0 0;
+
+  color: #b30a50;
+
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.rsvp-modal-actions {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 12px;
+}
+
+.rsvp-modal-cancel,
+.rsvp-modal-submit,
+.rsvp-success-close {
+  min-height: 50px;
+
+  padding: 10px 14px;
+
+  cursor: pointer;
+}
+
+.rsvp-modal-cancel {
+  background: #ffffff;
+  color: #493d48;
+
+  border: 1px solid #aaa0ac;
+
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.rsvp-modal-submit,
+.rsvp-success-close {
+  background: var(--accent);
+  color: #ffffff;
+
+  border: 1px solid #8d0a49;
+
+  font-family: var(--font-press-start), monospace;
+  font-size: 8px;
+
+  box-shadow: 4px 4px 0 rgba(35, 29, 41, 0.22);
+}
+
+/* ==========================================================
+   SUCCESS
+========================================================== */
+
+.rsvp-success {
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+
+  padding: 38px 30px;
+
+  text-align: center;
+
+  background:
+    linear-gradient(rgba(216, 28, 120, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(216, 28, 120, 0.055) 1px, transparent 1px),
+    var(--paper);
+
+  background-size: 26px 26px;
+}
+
+.rsvp-success-icon {
+  width: 62px;
+  height: 62px;
+
+  display: grid;
+  place-items: center;
+
+  background: var(--accent);
+  color: #ffffff;
+
+  border: 2px solid #8d0a49;
+  border-radius: 50%;
+
+  font-family: var(--font-vt323), monospace;
+  font-size: 42px;
+}
+
+.rsvp-success-kicker {
+  margin: 2px 0 0;
+
+  color: var(--accent-dark);
+
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.rsvp-success h2 {
+  margin: 0;
+
+  color: var(--ink);
+
+  font-family: var(--font-press-start), monospace;
+  font-size: clamp(20px, 4vw, 29px);
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.rsvp-success-copy {
+  max-width: 480px;
+  margin: 0;
+
+  color: #302735;
+
+  font-family: var(--font-vt323), monospace;
+  font-size: 25px;
+  line-height: 1.12;
+}
+
+.rsvp-success-terminal {
+  width: min(440px, 100%);
+
+  display: grid;
+  gap: 8px;
+
+  padding: 16px;
+
+  background: var(--terminal);
+  color: #aef0cc;
+
+  border: 1px solid #463746;
+
+  font-family: var(--font-vt323), monospace;
+  font-size: 22px;
+  line-height: 1.05;
+  text-align: left;
+}
+
+.rsvp-success-close {
+  width: min(260px, 100%);
+}
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 700px) {
+  .rsvp-body {
+    grid-template-columns: 1fr;
+    gap: 20px;
+
+    padding: 20px;
+  }
+
+  .rsvp-actions {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .rsvp-modal-backdrop {
+    padding: 12px;
+  }
+
+  .rsvp-modal-body,
+  .rsvp-success {
+    padding: 24px 18px;
+  }
+
+  .rsvp-console-status,
+  .rsvp-modal-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .rsvp-console-status > div {
+    border-right: 0;
+    border-bottom: 1px solid #463746;
+  }
+
+  .rsvp-console-status > div:last-child {
+    border-bottom: 0;
+  }
+
+  .rsvp-text {
+    font-size: 23px;
+  }
+}
