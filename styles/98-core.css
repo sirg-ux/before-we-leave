@@ -2275,3 +2275,218 @@ textarea {
     font-size: 8px;
   }
 }
+/* ==========================================================
+   ARCHIVE MOBILE — LAYOUT FIX
+========================================================== */
+
+@media (max-width: 768px) {
+  .archive-screen {
+    height: auto;
+    min-height: 100dvh;
+
+    padding: 10px;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .archive-shell {
+    height: auto;
+    min-height: calc(100dvh - 20px);
+
+    grid-template-rows: auto auto auto;
+
+    overflow: visible;
+  }
+
+  .archive-main {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    min-height: 0;
+
+    padding: 12px;
+    gap: 14px;
+
+    overflow: visible;
+  }
+
+  .archive-display-panel {
+    min-height: 0;
+
+    display: grid;
+    grid-template-rows: auto auto 250px auto;
+
+    padding: 18px 14px 16px;
+
+    overflow: hidden;
+  }
+
+  .archive-panel-kicker {
+    font-size: 10px;
+  }
+
+  .archive-panel-title {
+    margin: 14px 0 10px;
+
+    font-size: 24px;
+    line-height: 1.12;
+  }
+
+  .archive-disc-stage {
+    width: 100%;
+    min-height: 0;
+    height: 250px;
+
+    display: grid;
+    place-items: center;
+
+    padding: 0;
+
+    overflow: hidden;
+  }
+
+  .archive-disc-stage .memory-disc-wrap {
+    width: auto;
+    height: auto;
+
+    display: flex;
+
+    transform: none !important;
+  }
+
+  .archive-disc-stage .memory-disc-button {
+    width: min(220px, 58vw);
+
+    transform: none !important;
+  }
+
+  .archive-disc-stage .memory-disc {
+    translate: 0 0 !important;
+  }
+
+  .archive-panel-hint {
+    position: static;
+
+    min-height: auto;
+
+    margin: 8px 0 0;
+    padding: 0;
+
+    background: transparent;
+
+    font-size: 9px;
+  }
+
+  .archive-info-panel {
+    min-height: auto;
+
+    display: flex;
+
+    padding: 18px 14px;
+
+    overflow: visible;
+  }
+
+  .archive-info-code {
+    margin-top: 16px;
+
+    font-size: 34px;
+  }
+
+  .archive-info-title {
+    font-size: 17px;
+    line-height: 1.35;
+  }
+
+  .archive-info-divider {
+    margin: 16px 0;
+  }
+
+  .archive-info-meta {
+    gap: 14px;
+  }
+
+  .archive-info-row {
+    gap: 7px;
+  }
+
+  .archive-info-row span {
+    font-size: 9px;
+  }
+
+  .archive-info-row strong {
+    font-size: 21px;
+  }
+
+  .archive-info-actions {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+
+    width: 100%;
+
+    margin-top: 18px;
+    padding-top: 0;
+    gap: 6px;
+  }
+
+  .archive-info-actions .archive-action-button {
+    min-height: 42px;
+
+    padding: 5px 2px;
+
+    font-size: 6px;
+    line-height: 1.2;
+    white-space: normal;
+  }
+
+  .archive-bottombar {
+    min-height: auto;
+
+    padding: 14px;
+
+    align-items: flex-start;
+    flex-direction: column;
+
+    font-size: 8px;
+    line-height: 1.5;
+  }
+
+  .archive-bottombar > div {
+    width: 100%;
+
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .audio-toggle {
+    right: 12px;
+    bottom: 12px;
+
+    z-index: 200;
+
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 420px) {
+  .archive-display-panel {
+    grid-template-rows: auto auto 220px auto;
+  }
+
+  .archive-disc-stage {
+    height: 220px;
+  }
+
+  .archive-disc-stage .memory-disc-button {
+    width: min(195px, 56vw);
+  }
+
+  .archive-panel-title {
+    font-size: 21px;
+  }
+
+  .archive-info-actions .archive-action-button {
+    font-size: 5px;
+  }
+}
