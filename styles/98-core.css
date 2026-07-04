@@ -1822,3 +1822,456 @@ textarea {
     bottom: 78px;
   }
 }
+/* ==========================================================
+   ARCHIVE SCENE
+========================================================== */
+
+.archive-screen {
+  min-height: 100dvh;
+  height: 100dvh;
+  padding: 28px;
+  overflow: hidden;
+}
+
+.archive-shell {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  border: 2px solid #4a3d48;
+  background: #dfdbd7;
+  box-shadow:
+    0 0 0 3px #8b1a57,
+    10px 10px 0 rgba(20, 12, 24, 0.34);
+}
+
+.archive-topbar {
+  height: 54px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: #e11d7b;
+  border-bottom: 2px solid #6d0f3d;
+  color: #ffffff;
+  font-family: var(--font-press-start), monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.archive-main {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) 420px;
+  gap: 24px;
+  padding: 24px;
+  align-items: stretch;
+}
+
+.archive-display-panel {
+  min-height: 0;
+  padding: 28px 28px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  border: 1px solid #847882;
+  background: #e6e3df;
+  box-shadow: inset 0 0 0 2px #f6f3f1;
+}
+
+.archive-panel-kicker {
+  margin: 0;
+  color: #b01260;
+  font-family: var(--font-press-start), monospace;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.archive-panel-title {
+  margin: 24px 0 20px;
+  color: #241b2a;
+  font-family: var(--font-vt323), monospace;
+  font-size: clamp(26px, 2vw, 40px);
+  line-height: 1.1;
+  text-align: center;
+}
+
+.archive-disc-stage {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.archive-panel-hint {
+  margin: 18px 0 0;
+  color: #b01260;
+  font-family: var(--font-press-start), monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.archive-blink {
+  animation: archiveBlink 1.1s steps(2, end) infinite;
+}
+
+@keyframes archiveBlink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+
+  46%,
+  100% {
+    opacity: 0.35;
+  }
+}
+
+.archive-info-panel {
+  padding: 28px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  background: #221929;
+  border: 1px solid #4f4450;
+  box-shadow:
+    6px 6px 0 rgba(18, 9, 24, 0.28),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.04);
+}
+
+.archive-info-label {
+  margin: 0;
+  color: #fff6f8;
+  font-family: var(--font-press-start), monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.archive-info-code {
+  margin: 24px 0 8px;
+  color: #ff5ea8;
+  font-family: var(--font-vt323), monospace;
+  font-size: clamp(38px, 3vw, 58px);
+  line-height: 0.95;
+}
+
+.archive-info-title {
+  margin: 0;
+  color: #ffffff;
+  font-family: var(--font-press-start), monospace;
+  font-size: clamp(22px, 1.65vw, 32px);
+  line-height: 1.25;
+  word-break: break-word;
+}
+
+.archive-info-divider {
+  height: 2px;
+  margin: 22px 0 18px;
+  background: #e11d7b;
+}
+
+.archive-info-meta {
+  display: grid;
+  gap: 18px;
+}
+
+.archive-info-row {
+  display: grid;
+  gap: 10px;
+}
+
+.archive-info-row span {
+  color: #fff6f8;
+  font-family: var(--font-press-start), monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.archive-info-row strong {
+  color: #bdfde2;
+  font-family: var(--font-vt323), monospace;
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 400;
+}
+
+.archive-ready {
+  color: #42f29e !important;
+}
+
+.archive-info-actions {
+  margin-top: auto;
+  padding-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.archive-action-button {
+  min-height: 52px;
+  padding: 10px 12px;
+  border: 2px solid #3b3340;
+  font-family: var(--font-press-start), monospace;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    transform 0.14s ease,
+    filter 0.14s ease;
+}
+
+.archive-action-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.03);
+}
+
+.archive-action-button-light {
+  background: #f4f0ed;
+  color: #43384a;
+}
+
+.archive-action-button-primary {
+  background: #e11d7b;
+  border-color: #8f144d;
+  color: #ffffff;
+}
+
+.archive-bottombar {
+  min-height: 56px;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  background: #241b2a;
+  border-top: 2px solid #e11d7b;
+  color: #fff7fa;
+  font-family: var(--font-press-start), monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.archive-bottombar > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.archive-status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #35f08a;
+  box-shadow: 0 0 10px rgba(53, 240, 138, 0.7);
+}
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 1100px) {
+  .archive-main {
+    grid-template-columns: 1fr;
+  }
+
+  .archive-info-panel {
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .archive-screen {
+    padding: 10px;
+  }
+
+  .archive-shell {
+    box-shadow:
+      0 0 0 2px #8b1a57,
+      4px 4px 0 rgba(20, 12, 24, 0.24);
+  }
+
+  .archive-topbar {
+    height: auto;
+    padding: 12px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 10px;
+  }
+
+  .archive-main {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .archive-display-panel,
+  .archive-info-panel {
+    padding: 18px 14px;
+  }
+
+  .archive-panel-kicker {
+    font-size: 11px;
+  }
+
+  .archive-panel-title {
+    margin: 16px 0 14px;
+    font-size: 22px;
+  }
+
+  .archive-panel-hint {
+    margin-top: 12px;
+    font-size: 10px;
+  }
+
+  .archive-info-label {
+    font-size: 10px;
+  }
+
+  .archive-info-code {
+    margin-top: 18px;
+    font-size: 34px;
+  }
+
+  .archive-info-title {
+    font-size: 18px;
+    line-height: 1.25;
+  }
+
+  .archive-info-row strong {
+    font-size: 20px;
+  }
+
+  .archive-info-actions {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .archive-action-button {
+    min-height: 46px;
+    font-size: 10px;
+  }
+
+  .archive-bottombar {
+    padding: 12px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 8px;
+    font-size: 9px;
+  }
+
+  .archive-bottombar > div {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .archive-panel-title {
+    font-size: 18px;
+  }
+
+  .archive-info-code {
+    font-size: 30px;
+  }
+
+  .archive-info-title {
+    font-size: 16px;
+  }
+
+  .archive-info-row strong {
+    font-size: 18px;
+  }
+}
+/* ==========================================================
+   ARCHIVE ACTION BUTTONS — FINAL FIX
+========================================================== */
+
+.archive-info-actions {
+  width: 100%;
+
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+
+  align-items: stretch;
+}
+
+.archive-info-actions .archive-action-button {
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 6px;
+
+  border: 2px solid #3b3340;
+
+  font-family: var(--font-press-start), monospace;
+  font-size: 9px;
+  line-height: 1.25;
+  text-align: center;
+  white-space: nowrap;
+
+  cursor: pointer;
+}
+
+.archive-info-actions .archive-action-button-light {
+  background: #f4f0ed !important;
+  color: #43384a !important;
+
+  border-color: #3b3340 !important;
+}
+
+.archive-info-actions .archive-action-button-primary {
+  background: #e11d7b !important;
+  color: #ffffff !important;
+
+  border-color: #8f144d !important;
+
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.24);
+}
+
+.archive-info-actions .archive-action-button-primary:hover {
+  background: #b90f5d !important;
+}
+
+@media (max-width: 768px) {
+  .archive-info-actions {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 7px !important;
+  }
+
+  .archive-info-actions .archive-action-button {
+    min-height: 42px;
+    padding: 6px 3px;
+
+    font-size: 7px;
+  }
+}
+
+@media (max-width: 420px) {
+  .archive-info-actions {
+    grid-template-columns: 1fr !important;
+  }
+
+  .archive-info-actions .archive-action-button {
+    min-height: 44px;
+    font-size: 8px;
+  }
+}

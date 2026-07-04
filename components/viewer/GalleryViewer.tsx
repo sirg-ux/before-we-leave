@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 type GalleryPhoto = {
   name: string;
@@ -11,10 +11,15 @@ type GalleryPhoto = {
 export default function GalleryViewer() {
   const [photos, setPhotos] = useState<GalleryPhoto[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedPhoto, setSelectedPhoto] =
-    useState<GalleryPhoto | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [zoom, setZoom] = useState(1);
   const [isDownloading, setIsDownloading] = useState(false);
+
+  const selectedPhoto = useMemo(() => {
+    if (selectedIndex === null) return null;
+
+    return photos[selectedIndex] ?? null;
+  }, [photos, selectedIndex]);
 
   useEffect(() => {
     async function loadGallery() {
@@ -36,13 +41,70 @@ export default function GalleryViewer() {
     void loadGallery();
   }, []);
 
-  function openPhoto(photo: GalleryPhoto) {
-    setSelectedPhoto(photo);
+  useEffect(() => {
+    if (selectedIndex === null) return;
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setSelectedIndex(null);
+        setZoom(1);
+      }
+
+      if (event.key === "ArrowRight") {
+        setSelectedIndex((current) => {
+          if (current === null || photos.length === 0) return current;
+
+          return (current + 1) % photos.length;
+        });
+
+        setZoom(1);
+      }
+
+      if (event.key === "ArrowLeft") {
+        setSelectedIndex((current) => {
+          if (current === null || photos.length === 0) return current;
+
+          return (current - 1 + photos.length) % photos.length;
+        });
+
+        setZoom(1);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [photos.length, selectedIndex]);
+
+  function openPhoto(index: number) {
+    setSelectedIndex(index);
     setZoom(1);
   }
 
   function closePhoto() {
-    setSelectedPhoto(null);
+    setSelectedIndex(null);
+    setZoom(1);
+  }
+
+  function showPrevious() {
+    setSelectedIndex((current) => {
+      if (current === null || photos.length === 0) return current;
+
+      return (current - 1 + photos.length) % photos.length;
+    });
+
+    setZoom(1);
+  }
+
+  function showNext() {
+    setSelectedIndex((current) => {
+      if (current === null || photos.length === 0) return current;
+
+      return (current + 1) % photos.length;
+    });
+
     setZoom(1);
   }
 
@@ -68,6 +130,7 @@ export default function GalleryViewer() {
 
       link.href = objectUrl;
       link.download = selectedPhoto.name;
+
       document.body.appendChild(link);
       link.click();
 
@@ -163,7 +226,7 @@ export default function GalleryViewer() {
                     key={photo.name}
                     type="button"
                     className="gallery-photo-card"
-                    onClick={() => openPhoto(photo)}
+                    onClick={() => openPhoto(index)}
                   >
                     <img
                       src={photo.url}
@@ -203,7 +266,7 @@ export default function GalleryViewer() {
         </footer>
       </section>
 
-      {selectedPhoto && (
+      {selectedPhoto && selectedIndex !== null && (
         <div
           className="gallery-lightbox"
           role="presentation"
@@ -220,22 +283,41 @@ export default function GalleryViewer() {
             aria-label="Photo viewer"
           >
             <header className="gallery-lightbox-bar">
-              <span>PHOTO-VIEWER.EXE</span>
-
               <span>
-                {Math.round(zoom * 100)}%
+                PHOTO {String(selectedIndex + 1).padStart(2, "0")} /{" "}
+                {String(photos.length).padStart(2, "0")}
               </span>
+
+              <span>{Math.round(zoom * 100)}%</span>
             </header>
 
             <div className="gallery-lightbox-stage">
+              <button
+                type="button"
+                className="gallery-photo-arrow gallery-photo-arrow-left"
+                onClick={showPrevious}
+                aria-label="Previous photo"
+              >
+                ←
+              </button>
+
               <img
                 src={selectedPhoto.url}
-                alt="Graduation memory preview"
+                alt={`Graduation memory ${selectedIndex + 1}`}
                 className="gallery-lightbox-image"
                 style={{
                   transform: `scale(${zoom})`,
                 }}
               />
+
+              <button
+                type="button"
+                className="gallery-photo-arrow gallery-photo-arrow-right"
+                onClick={showNext}
+                aria-label="Next photo"
+              >
+                →
+              </button>
             </div>
 
             <footer className="gallery-lightbox-controls">

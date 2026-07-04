@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 
 import Disc from "@/components/disc/Disc";
 import { archives } from "@/content/archive";
-
 import { useScene } from "@/components/providers/SceneProvider";
 import { useSound } from "@/hooks/useSound";
 
@@ -20,165 +19,185 @@ export default function ArchiveScene() {
 
   const activeArchive = archives[selectedArchive];
 
-  function selectPrevious() {
-    sound.click();
-
-    setSelectedArchive(
-      (selectedArchive - 1 + archives.length) % archives.length,
-    );
-  }
-
-  function selectNext() {
-    sound.click();
-
-    setSelectedArchive(
-      (selectedArchive + 1) % archives.length,
-    );
-  }
-
-  function openArchive() {
-    sound.insert();
-
-    window.setTimeout(() => {
-      setScene("drive");
-    }, 120);
-  }
-
   useEffect(() => {
-    function handleWheel(event: WheelEvent) {
-      event.preventDefault();
-
-      if (wheelLocked.current || event.deltaY === 0) {
-        return;
-      }
+    const handleWheel = (event: WheelEvent) => {
+      if (wheelLocked.current) return;
 
       wheelLocked.current = true;
 
       if (event.deltaY > 0) {
-        selectNext();
-      } else {
-        selectPrevious();
+        sound.click();
+
+        setSelectedArchive(
+          (selectedArchive + 1) % archives.length
+        );
       }
 
-      window.setTimeout(() => {
+      if (event.deltaY < 0) {
+        sound.click();
+
+        setSelectedArchive(
+          (selectedArchive - 1 + archives.length) %
+            archives.length
+        );
+      }
+
+      setTimeout(() => {
         wheelLocked.current = false;
-      }, 240);
-    }
+      }, 220);
+    };
 
     window.addEventListener("wheel", handleWheel, {
-      passive: false,
+      passive: true,
     });
 
     return () => {
       window.removeEventListener("wheel", handleWheel);
     };
-  }, [selectedArchive]);
+  }, [
+    selectedArchive,
+    setSelectedArchive,
+    sound,
+  ]);
 
   useEffect(() => {
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "ArrowRight" || event.key === "ArrowDown") {
-        event.preventDefault();
-        selectNext();
-      }
+    const handleKeyDown = (
+      event: KeyboardEvent
+    ) => {
+      switch (event.key) {
+        case "ArrowRight":
+          event.preventDefault();
+          sound.click();
 
-      if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
-        event.preventDefault();
-        selectPrevious();
-      }
+          setSelectedArchive(
+            (selectedArchive + 1) % archives.length
+          );
+          break;
 
-      if (event.key === "Enter") {
-        event.preventDefault();
-        openArchive();
-      }
-    }
+        case "ArrowLeft":
+          event.preventDefault();
+          sound.click();
 
-    window.addEventListener("keydown", handleKeyDown);
+          setSelectedArchive(
+            (selectedArchive - 1 + archives.length) %
+              archives.length
+          );
+          break;
+
+        case "Enter":
+          event.preventDefault();
+          sound.insert();
+
+          setTimeout(() => {
+            setScene("drive");
+          }, 120);
+          break;
+      }
+    };
+
+    window.addEventListener(
+      "keydown",
+      handleKeyDown
+    );
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener(
+        "keydown",
+        handleKeyDown
+      );
     };
-  }, [selectedArchive]);
+  }, [
+    selectedArchive,
+    setSelectedArchive,
+    setScene,
+    sound,
+  ]);
+
+  function goPrevious() {
+    sound.click();
+
+    setSelectedArchive(
+      (selectedArchive - 1 + archives.length) %
+        archives.length
+    );
+  }
+
+  function goNext() {
+    sound.click();
+
+    setSelectedArchive(
+      (selectedArchive + 1) % archives.length
+    );
+  }
+
+  function openDisc() {
+    sound.insert();
+
+    setTimeout(() => {
+      setScene("drive");
+    }, 120);
+  }
 
   return (
-    <main className="archive-scene">
-      <section className="archive-scene-shell">
-        <header className="archive-scene-topbar">
-          <div className="archive-scene-brand">
-            <span className="archive-scene-orb">◉</span>
-
-            <div>
-              <p>MEMORY ARCHIVE / DISC SELECT</p>
-              <h1>MEMORY LIBRARY</h1>
-            </div>
-          </div>
-
-          <div className="archive-scene-status">
-            <span>DISC INDEX</span>
-
-            <strong>
-              {String(selectedArchive + 1).padStart(2, "0")} /{" "}
-              {String(archives.length).padStart(2, "0")}
-            </strong>
-          </div>
-        </header>
-
-        <div className="archive-scene-bar">
-          <div>
-            <span>✦</span>
-            <span>ARCHIVE-SELECT.EXE</span>
-          </div>
-
+    <main className="archive-screen">
+      <section className="archive-shell">
+        <div className="archive-topbar">
+          <span>✦ ARCHIVE-SELECT.EXE</span>
           <span>SCROLL TO SWITCH DISC</span>
         </div>
 
-        <div className="archive-scene-content">
-          <section className="archive-disc-stage">
-            <div className="archive-stage-copy">
-              <span>DISC LIBRARY</span>
-              <p>Select a memory disc to continue.</p>
-            </div>
+        <div className="archive-main">
+          <section className="archive-display-panel">
+            <p className="archive-panel-kicker">
+              DISC LIBRARY
+            </p>
 
-            <div className="archive-disc-slot">
+            <p className="archive-panel-title">
+              Select a memory disc to continue.
+            </p>
+
+            <div className="archive-disc-stage">
               <Disc
                 title={activeArchive.code}
                 selected
-                onClick={openArchive}
+                onClick={openDisc}
               />
             </div>
 
-            <p className="archive-open-hint">
+            <p className="archive-panel-hint archive-blink">
               CLICK DISC TO OPEN
             </p>
           </section>
 
           <aside className="archive-info-panel">
-            <span className="archive-info-kicker">
+            <p className="archive-info-label">
               SELECTED MEMORY
-            </span>
-
-            <p className="archive-info-code">
-              {activeArchive.code}
             </p>
 
-            <h2>{activeArchive.title}</h2>
+            <h2 className="archive-info-code">
+              {activeArchive.code}
+            </h2>
 
-            <div className="archive-info-rule" />
+            <h3 className="archive-info-title">
+              {activeArchive.title}
+            </h3>
 
-            <div className="archive-info-data">
-              <div>
+            <div className="archive-info-divider" />
+
+            <div className="archive-info-meta">
+              <div className="archive-info-row">
                 <span>FORMAT</span>
                 <strong>MEMORY DISC</strong>
               </div>
 
-              <div>
+              <div className="archive-info-row">
                 <span>STATUS</span>
                 <strong className="archive-ready">
-                  <i />
-                  READY
+                  ● READY
                 </strong>
               </div>
 
-              <div>
+              <div className="archive-info-row">
                 <span>INPUT</span>
                 <strong>SCROLL / CLICK</strong>
               </div>
@@ -187,22 +206,24 @@ export default function ArchiveScene() {
             <div className="archive-info-actions">
               <button
                 type="button"
-                onClick={selectPrevious}
+                className="archive-action-button archive-action-button-light"
+                onClick={goPrevious}
               >
                 ← PREVIOUS
               </button>
 
               <button
                 type="button"
-                className="archive-open-button"
-                onClick={openArchive}
+                className="archive-action-button archive-action-button-primary"
+                onClick={openDisc}
               >
                 OPEN DISC
               </button>
 
               <button
                 type="button"
-                onClick={selectNext}
+                className="archive-action-button archive-action-button-light"
+                onClick={goNext}
               >
                 NEXT →
               </button>
@@ -210,16 +231,30 @@ export default function ArchiveScene() {
           </aside>
         </div>
 
-        <footer className="archive-scene-footer">
+        <footer className="archive-bottombar">
           <div>
-            <span className="archive-scene-pulse" />
+            <span className="archive-status-dot" />
             <span>MEMORY LINK ESTABLISHED</span>
           </div>
 
           <div>
-            <span>SCROLL / ARROW KEYS / ENTER</span>
+            <span>
+              {String(selectedArchive + 1).padStart(
+                2,
+                "0"
+              )}{" "}
+              /{" "}
+              {String(archives.length).padStart(
+                2,
+                "0"
+              )}
+            </span>
+
             <span>•</span>
-            <span>FTU 2026</span>
+
+            <span>
+              SCROLL / ARROW KEYS / ENTER
+            </span>
           </div>
         </footer>
       </section>
