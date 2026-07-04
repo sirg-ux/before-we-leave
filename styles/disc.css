@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 18px;
+  gap: 0;
 }
 
 .memory-disc-button {
@@ -32,20 +32,24 @@
 
   overflow: hidden;
 
+  border: 3px solid #ffffff;
   border-radius: 50%;
+  outline: 2px solid #3b323c;
 
   background: #d8d4d2;
-
-  border: 3px solid #ffffff;
-  outline: 2px solid #3b323c;
 
   box-shadow:
     8px 8px 0 rgba(35, 29, 41, 0.28),
     inset 0 0 0 10px #bdb8b8,
     inset 0 0 0 12px #f5f1ef;
 
+  will-change: rotate, translate, scale;
+
+  animation: memoryDiscRotate 18s linear infinite;
+
   transition:
-    transform 0.18s ease,
+    translate 0.18s ease,
+    scale 0.18s ease,
     box-shadow 0.18s ease,
     outline-color 0.18s ease;
 }
@@ -57,9 +61,8 @@
   position: absolute;
   inset: 18px;
 
-  border-radius: 50%;
-
   border: 1px solid rgba(57, 47, 58, 0.24);
+  border-radius: 50%;
 }
 
 .memory-disc::after {
@@ -68,12 +71,13 @@
   position: absolute;
   inset: 43px;
 
-  border-radius: 50%;
-
   border: 1px solid rgba(57, 47, 58, 0.14);
+  border-radius: 50%;
 }
 
 .memory-disc-button:hover .memory-disc {
+  translate: -3px -3px;
+
   outline-color: var(--accent);
 
   box-shadow:
@@ -82,16 +86,19 @@
     inset 0 0 0 10px #bdb8b8,
     inset 0 0 0 12px #f5f1ef;
 
-  transform: translate(-3px, -3px) rotate(-1deg);
+  animation-duration: 5s;
 }
 
 .memory-disc-button:active .memory-disc {
+  translate: 2px 2px;
+  scale: 0.98;
+
   box-shadow:
     2px 2px 0 rgba(35, 29, 41, 0.24),
     inset 0 0 0 10px #bdb8b8,
     inset 0 0 0 12px #f5f1ef;
 
-  transform: translate(2px, 2px) scale(0.98);
+  animation-duration: 1.4s;
 }
 
 .memory-disc-button-active .memory-disc {
@@ -103,7 +110,12 @@
     inset 0 0 0 10px #bdb8b8,
     inset 0 0 0 12px #f5f1ef;
 
-  transform: rotate(1deg);
+  animation-duration: 14s;
+}
+
+.memory-disc-button-active:hover .memory-disc {
+  translate: -2px -2px;
+  animation-duration: 4s;
 }
 
 /* ==========================================================
@@ -114,9 +126,8 @@
   position: absolute;
   inset: 12px;
 
-  border-radius: 50%;
-
   border: 2px solid rgba(53, 43, 54, 0.36);
+  border-radius: 50%;
 }
 
 .memory-disc-inner-ring {
@@ -125,11 +136,10 @@
   width: 56%;
   aspect-ratio: 1;
 
+  border: 2px solid #a9a1a5;
   border-radius: 50%;
 
   background: #e9e5e3;
-
-  border: 2px solid #a9a1a5;
 
   box-shadow:
     inset 0 0 0 7px #f8f5f3,
@@ -146,11 +156,11 @@
   width: 77%;
   aspect-ratio: 1;
 
-  border-radius: 50%;
-
   display: flex;
   align-items: center;
   justify-content: center;
+
+  border-radius: 50%;
 
   color: #6e626d;
 
@@ -197,17 +207,16 @@
   justify-content: center;
   gap: 8px;
 
-  text-align: center;
-
+  border: 2px solid #b9839e;
   border-radius: 50%;
 
   background: #f6eef2;
 
-  border: 2px solid #b9839e;
-
   box-shadow:
     inset 0 0 0 4px #ffffff,
     2px 2px 0 rgba(35, 29, 41, 0.14);
+
+  text-align: center;
 }
 
 .memory-disc-label-top,
@@ -262,7 +271,6 @@
 
 .memory-disc-hub {
   position: absolute;
-
   z-index: 3;
 
   width: 19%;
@@ -271,23 +279,21 @@
   display: grid;
   place-items: center;
 
+  border: 3px solid #ffffff;
   border-radius: 50%;
+  outline: 2px solid #746873;
 
   background: #3b323c;
-
-  border: 3px solid #ffffff;
-  outline: 2px solid #746873;
 }
 
 .memory-disc-hub-inner {
   width: 36%;
   aspect-ratio: 1;
 
+  border: 1px solid #7d0b43;
   border-radius: 50%;
 
   background: var(--accent);
-
-  border: 1px solid #7d0b43;
 }
 
 .memory-disc-caption {
@@ -299,6 +305,26 @@
   font-size: 8px;
   letter-spacing: 0.1em;
   text-align: center;
+}
+
+/* ==========================================================
+   ANIMATION
+========================================================== */
+
+@keyframes memoryDiscRotate {
+  from {
+    rotate: 0deg;
+  }
+
+  to {
+    rotate: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .memory-disc {
+    animation: none;
+  }
 }
 
 @media (max-width: 640px) {
@@ -314,15 +340,4 @@
   .memory-disc-label-bottom {
     font-size: 4px;
   }
-}
-.memory-disc-wrap {
-  gap: 0;
-}
-
-.memory-disc-button-active .memory-disc {
-  transform: none;
-}
-
-.memory-disc-button-active .memory-disc:hover {
-  transform: translate(-2px, -2px) rotate(-1deg);
 }

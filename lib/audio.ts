@@ -40,7 +40,7 @@ function getContext() {
 
   masterGain.gain.value = muted ? 0 : 0.82;
   sfxGain.gain.value = 0.26;
-  musicGain.gain.value = 0.105;
+  musicGain.gain.value = 0.22;
 
   sfxGain.connect(masterGain);
   musicGain.connect(masterGain);

@@ -1,0 +1,425 @@
+/* ==========================================================
+   LIVE GALLERY
+========================================================== */
+
+.gallery-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+
+  margin-top: 28px;
+}
+
+.gallery-photo-card {
+  position: relative;
+
+  aspect-ratio: 1;
+
+  padding: 0;
+
+  overflow: hidden;
+
+  background: var(--panel-dark);
+
+  border: 2px solid #ffffff;
+  outline: 1px solid #514957;
+
+  cursor: pointer;
+}
+
+.gallery-photo-card:hover {
+  outline: 3px solid var(--accent);
+  transform: translate(-2px, -2px);
+}
+
+.gallery-photo-card img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+.gallery-photo-index {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+
+  min-width: 28px;
+
+  padding: 5px 6px;
+
+  background: var(--accent);
+  color: #ffffff;
+
+  border: 1px solid #ffffff;
+
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+
+  display: grid;
+  place-items: center;
+
+  padding: 24px;
+
+  background: rgba(10, 8, 13, 0.88);
+}
+
+.gallery-lightbox-image {
+  max-width: min(100%, 1100px);
+  max-height: calc(100dvh - 48px);
+
+  object-fit: contain;
+
+  border: 2px solid #ffffff;
+  outline: 2px solid var(--accent);
+
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.45);
+}
+
+.gallery-lightbox-close {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+
+  width: 42px;
+  height: 42px;
+
+  background: var(--accent);
+  color: #ffffff;
+
+  border: 2px solid #ffffff;
+
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 24px;
+
+  cursor: pointer;
+}
+
+/* ==========================================================
+   PRIVATE GALLERY ADMIN
+========================================================== */
+
+.gallery-admin-page {
+  min-height: 100dvh;
+
+  display: grid;
+  place-items: center;
+
+  padding: 28px;
+
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    var(--desktop);
+
+  background-size: 28px 28px;
+}
+
+.gallery-admin-shell {
+  width: min(980px, 100%);
+
+  overflow: hidden;
+
+  background: var(--paper);
+
+  border: 2px solid #ffffff;
+  outline: 2px solid #302736;
+
+  box-shadow:
+    8px 8px 0 rgba(0, 0, 0, 0.45),
+    0 0 0 5px rgba(216, 28, 120, 0.16);
+}
+
+.gallery-admin-bar {
+  min-height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+
+  padding: 10px 16px;
+
+  background: var(--accent);
+  color: #ffffff;
+
+  border-bottom: 2px solid #5f0832;
+
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.gallery-admin-body {
+  display: grid;
+  gap: 26px;
+
+  padding: 30px;
+
+  background:
+    linear-gradient(rgba(216, 28, 120, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(216, 28, 120, 0.055) 1px, transparent 1px),
+    var(--paper);
+
+  background-size: 26px 26px;
+}
+
+.gallery-admin-heading {
+  text-align: center;
+}
+
+.gallery-admin-heading p {
+  margin: 0;
+
+  color: var(--accent-dark);
+
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.gallery-admin-heading h1 {
+  margin: 14px 0 0;
+
+  color: var(--ink);
+
+  font-family: var(--font-press-start), monospace;
+  font-size: clamp(19px, 3vw, 31px);
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.gallery-admin-heading span {
+  display: block;
+
+  margin-top: 14px;
+
+  color: #302735;
+
+  font-family: var(--font-vt323), monospace;
+  font-size: 25px;
+}
+
+.gallery-admin-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 14px;
+  align-items: end;
+
+  padding: 18px;
+
+  background: var(--terminal);
+
+  border: 1px solid #463746;
+}
+
+.gallery-admin-form label {
+  display: grid;
+  gap: 8px;
+}
+
+.gallery-admin-form label span {
+  color: #efbdd6;
+
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.gallery-admin-form input {
+  min-width: 0;
+  min-height: 46px;
+
+  padding: 0 12px;
+
+  background: #ffffff;
+  color: var(--ink);
+
+  border: 1px solid #9f929e;
+
+  font-family: var(--font-vt323), monospace;
+  font-size: 22px;
+}
+
+.gallery-admin-form button {
+  min-height: 46px;
+
+  padding: 0 16px;
+
+  background: var(--accent);
+  color: #ffffff;
+
+  border: 1px solid #8d0a49;
+
+  font-family: var(--font-press-start), monospace;
+  font-size: 8px;
+
+  cursor: pointer;
+}
+
+.gallery-admin-message {
+  grid-column: 1 / -1;
+
+  margin: 0;
+
+  color: #aef0cc;
+
+  font-family: var(--font-vt323), monospace;
+  font-size: 23px;
+}
+
+.gallery-admin-list {
+  overflow: hidden;
+
+  border: 2px solid #ffffff;
+  outline: 1px solid #514957;
+}
+
+.gallery-admin-list-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+
+  padding: 11px 14px;
+
+  background: var(--panel-dark);
+  color: #ffffff;
+
+  border-bottom: 2px solid var(--accent);
+
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.gallery-admin-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+
+  padding: 14px;
+
+  background: var(--paper);
+}
+
+.gallery-admin-photo {
+  position: relative;
+
+  aspect-ratio: 1;
+
+  overflow: hidden;
+
+  background: var(--panel-dark);
+}
+
+.gallery-admin-photo img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.gallery-admin-photo button {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+
+  padding: 6px 8px;
+
+  background: var(--accent);
+  color: #ffffff;
+
+  border: 1px solid #ffffff;
+
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.gallery-admin-empty {
+  grid-column: 1 / -1;
+
+  margin: 20px 0;
+
+  color: var(--muted);
+
+  font-family: var(--font-vt323), monospace;
+  font-size: 25px;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .gallery-photo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gallery-admin-form {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-admin-photo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .gallery-lightbox {
+    padding: 14px;
+  }
+
+  .gallery-lightbox-close {
+    top: 12px;
+    right: 12px;
+  }
+
+  .gallery-admin-page {
+    padding: 10px;
+  }
+
+  .gallery-admin-body {
+    padding: 20px 14px;
+  }
+
+  .gallery-admin-bar {
+    font-size: 9px;
+  }
+}
+.gallery-admin-list-tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gallery-admin-list-tools button {
+  min-height: 28px;
+
+  padding: 5px 8px;
+
+  background: transparent;
+  color: #ffffff;
+
+  border: 1px solid rgba(255, 255, 255, 0.5);
+
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.gallery-admin-list-tools button:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
