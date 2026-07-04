@@ -1,5 +1,7 @@
 /* ==========================================================
-   FLAT MAGENTA Y2K — CORE
+   FLAT MAGENTA Y2K — CORE (CLEAN)
+   Keep scene-specific gallery, RSVP, location and disc CSS
+   in their own files.
 ========================================================== */
 
 :root {
@@ -36,18 +38,21 @@ select {
   font: inherit;
 }
 
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
 /* ==========================================================
-   SHARED SCENE FRAME
+   SHARED DESKTOP BACKGROUND / WINDOW FRAME
 ========================================================== */
 
 .boot-scene,
 .loading-scene,
-.archive-scene,
 .drive-scene,
 .track-scene,
 .ending-viewer,
@@ -59,7 +64,6 @@ a {
   place-items: center;
 
   padding: 24px;
-  overflow: hidden;
 
   background:
     linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
@@ -71,7 +75,6 @@ a {
 
 .boot-console,
 .loading-console,
-.archive-scene-shell,
 .drive-shell,
 .track-shell,
 .ending-shell,
@@ -113,12 +116,11 @@ a {
 }
 
 /* ==========================================================
-   SHARED BARS / FOOTERS
+   SHARED WINDOW BARS / FOOTERS
 ========================================================== */
 
 .boot-console-bar,
 .loading-console-bar,
-.archive-scene-bar,
 .drive-windowbar,
 .track-windowbar,
 .ending-windowbar,
@@ -146,7 +148,6 @@ a {
 
 .boot-console-bar-left,
 .loading-console-bar-left,
-.archive-scene-bar div,
 .drive-windowbar div,
 .track-windowbar div,
 .ending-windowbar > div,
@@ -178,7 +179,6 @@ a {
 
 .boot-console-footer,
 .loading-console-footer,
-.archive-scene-footer,
 .drive-footer,
 .track-footer,
 .ending-footer,
@@ -206,7 +206,6 @@ a {
 
 .boot-console-footer span,
 .loading-console-footer span,
-.archive-scene-footer > div,
 .drive-footer > div,
 .track-footer > div,
 .ending-footer > div,
@@ -220,7 +219,6 @@ a {
 
 .boot-console-footer i,
 .loading-console-footer i,
-.archive-scene-pulse,
 .drive-pulse,
 .track-pulse,
 .ending-pulse,
@@ -325,22 +323,386 @@ a {
 }
 
 /* ==========================================================
-   ARCHIVE SELECT — SINGLE SCREEN
+   ARCHIVE SELECT — CURRENT ArchiveScene.tsx
 ========================================================== */
 
-.archive-scene {
+.archive-screen {
+  width: 100%;
+  min-height: 100dvh;
   height: 100dvh;
+
+  padding: 28px;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    var(--desktop);
+
+  background-size: 28px 28px;
 }
 
-.archive-scene-shell {
-  width: min(1120px, 100%);
-  height: min(760px, calc(100dvh - 48px));
+.archive-shell {
+  width: min(1600px, 100%);
+  height: 100%;
 
   display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr) 48px;
+  grid-template-rows: 54px minmax(0, 1fr) 70px;
+
+  overflow: hidden;
+
+  background: #dfdbd7;
+
+  border: 2px solid #4a3d48;
+
+  box-shadow:
+    0 0 0 3px #8b1a57,
+    10px 10px 0 rgba(20, 12, 24, 0.34);
 }
 
-.archive-scene-topbar,
+.archive-topbar {
+  min-height: 54px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding: 0 20px;
+
+  background: var(--accent);
+  color: #ffffff;
+
+  border-bottom: 2px solid #6d0f3d;
+
+  font-family: var(--font-press-start), monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.archive-main {
+  min-width: 0;
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(350px, 0.85fr);
+  gap: 24px;
+
+  padding: 24px;
+
+  overflow: hidden;
+}
+
+.archive-display-panel {
+  min-width: 0;
+  min-height: 0;
+
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  align-items: start;
+  justify-items: center;
+
+  padding: 28px 28px 20px;
+
+  overflow: hidden;
+
+  background: #e6e3df;
+
+  border: 1px solid #847882;
+
+  box-shadow: inset 0 0 0 2px #f6f3f1;
+}
+
+.archive-panel-kicker {
+  margin: 0;
+
+  color: #b01260;
+
+  font-family: var(--font-press-start), monospace;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.archive-panel-title {
+  margin: 24px 0 12px;
+
+  color: #241b2a;
+
+  font-family: var(--font-vt323), monospace;
+  font-size: clamp(26px, 2vw, 40px);
+  line-height: 1.1;
+  text-align: center;
+}
+
+.archive-disc-stage {
+  width: 100%;
+  min-height: 0;
+
+  display: grid;
+  place-items: center;
+
+  padding: 10px 0 4px;
+
+  overflow: hidden;
+}
+
+.archive-disc-stage .memory-disc-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: auto;
+  height: auto;
+
+  transform: none !important;
+}
+
+.archive-disc-stage .memory-disc-button {
+  width: min(315px, 29vw);
+
+  transform: none !important;
+}
+
+.archive-disc-stage .memory-disc {
+  translate: 0 0 !important;
+}
+
+.archive-panel-hint {
+  min-height: 24px;
+  margin: 10px 0 0;
+
+  color: #b01260;
+
+  font-family: var(--font-press-start), monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  line-height: 1.25;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.archive-blink {
+  animation: archiveBlink 1.1s steps(2, end) infinite;
+}
+
+@keyframes archiveBlink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+
+  46%,
+  100% {
+    opacity: 0.35;
+  }
+}
+
+.archive-info-panel {
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 28px 24px 22px;
+
+  overflow: hidden;
+
+  background: #221929;
+
+  border: 1px solid #4f4450;
+
+  box-shadow:
+    6px 6px 0 rgba(18, 9, 24, 0.28),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.04);
+}
+
+.archive-info-label {
+  margin: 0;
+
+  color: #fff6f8;
+
+  font-family: var(--font-press-start), monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.archive-info-code {
+  margin: 24px 0 8px;
+
+  color: #ff5ea8;
+
+  font-family: var(--font-vt323), monospace;
+  font-size: clamp(38px, 3vw, 58px);
+  font-weight: 400;
+  line-height: 0.95;
+}
+
+.archive-info-title {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family: var(--font-press-start), monospace;
+  font-size: clamp(20px, 1.65vw, 32px);
+  font-weight: 400;
+  line-height: 1.25;
+  word-break: break-word;
+}
+
+.archive-info-divider {
+  height: 2px;
+
+  flex: 0 0 2px;
+
+  margin: 22px 0 18px;
+
+  background: var(--accent);
+}
+
+.archive-info-meta {
+  display: grid;
+  gap: 18px;
+}
+
+.archive-info-row {
+  display: grid;
+  gap: 10px;
+}
+
+.archive-info-row span {
+  color: #fff6f8;
+
+  font-family: var(--font-press-start), monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.archive-info-row strong {
+  color: #bdfde2;
+
+  font-family: var(--font-vt323), monospace;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.archive-ready {
+  color: #42f29e !important;
+}
+
+.archive-info-actions {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+
+  margin-top: auto;
+  padding-top: 22px;
+}
+
+.archive-action-button {
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 6px;
+
+  border: 2px solid #3b3340;
+
+  font-family: var(--font-press-start), monospace;
+  font-size: 9px;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.14s ease,
+    filter 0.14s ease;
+}
+
+.archive-action-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.03);
+}
+
+.archive-action-button-light {
+  background: #f4f0ed;
+  color: #43384a;
+}
+
+.archive-action-button-primary {
+  background: var(--accent);
+  color: #ffffff;
+
+  border-color: #8f144d;
+
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.24);
+}
+
+.archive-action-button-primary:hover {
+  background: #b90f5d;
+}
+
+.archive-bottombar {
+  min-height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+
+  padding: 0 18px;
+
+  background: #241b2a;
+  color: #fff7fa;
+
+  border-top: 2px solid var(--accent);
+
+  font-family: var(--font-press-start), monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.archive-bottombar > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.archive-status-dot {
+  width: 10px;
+  height: 10px;
+
+  flex: 0 0 10px;
+
+  border-radius: 50%;
+
+  background: #35f08a;
+
+  box-shadow: 0 0 10px rgba(53, 240, 138, 0.7);
+}
+
+/* ==========================================================
+   DRIVE SCENE + TRACK LIST
+========================================================== */
+
 .drive-topbar,
 .track-topbar {
   display: flex;
@@ -355,7 +717,6 @@ a {
   border-bottom: 1px solid var(--line);
 }
 
-.archive-scene-brand,
 .drive-brand,
 .track-brand {
   display: flex;
@@ -363,7 +724,6 @@ a {
   gap: 13px;
 }
 
-.archive-scene-orb,
 .drive-orb,
 .track-orb {
   width: 34px;
@@ -382,7 +742,6 @@ a {
   box-shadow: 3px 3px 0 rgba(35, 29, 41, 0.18);
 }
 
-.archive-scene-brand p,
 .drive-brand p,
 .track-brand p {
   margin: 0;
@@ -395,7 +754,6 @@ a {
   letter-spacing: 0.05em;
 }
 
-.archive-scene-brand h1,
 .drive-brand h1,
 .track-brand h1 {
   margin: 7px 0 0;
@@ -408,7 +766,6 @@ a {
   line-height: 1.35;
 }
 
-.archive-scene-status,
 .drive-code,
 .track-number {
   display: grid;
@@ -416,7 +773,6 @@ a {
   gap: 5px;
 }
 
-.archive-scene-status span,
 .drive-code span,
 .drive-code small,
 .track-number span {
@@ -427,7 +783,6 @@ a {
   font-weight: 700;
 }
 
-.archive-scene-status strong,
 .drive-code strong,
 .track-number strong {
   color: var(--ink);
@@ -442,223 +797,6 @@ a {
   color: var(--accent);
   font-size: 42px;
 }
-/* ==========================================================
-   ARCHIVE SELECT CONTENT
-========================================================== */
-
-.archive-scene-content {
-  min-height: 0;
-
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 350px;
-  gap: 22px;
-
-  padding: 22px;
-
-  overflow: hidden;
-
-  background: var(--window);
-}
-
-.archive-disc-stage {
-  min-height: 0;
-
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
-  justify-items: center;
-
-  padding: 16px;
-
-  background: var(--paper);
-
-  border: 2px solid #ffffff;
-  outline: 1px solid #514957;
-}
-
-.archive-stage-copy {
-  text-align: center;
-}
-
-.archive-stage-copy span,
-.archive-open-hint {
-  color: var(--accent-dark);
-
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 0.07em;
-}
-
-.archive-stage-copy p {
-  margin: 14px 0 0;
-
-  color: #302735;
-
-  font-family: var(--font-vt323), monospace;
-  font-size: 31px;
-  line-height: 1.1;
-}
-
-.archive-disc-slot {
-  min-height: 0;
-
-  display: grid;
-  place-items: center;
-
-  padding: 10px 0;
-}
-
-.archive-disc-slot .memory-disc-button {
-  width: min(275px, 30vw);
-}
-
-.archive-open-hint {
-  margin: 0;
-}
-
-.archive-info-panel {
-  min-height: 0;
-
-  display: grid;
-  grid-template-rows: auto auto auto auto minmax(0, 1fr) auto;
-
-  padding: 18px;
-
-  overflow: hidden;
-
-  background: var(--panel-dark);
-
-  border: 1px solid #463746;
-
-  box-shadow: 4px 4px 0 rgba(35, 29, 41, 0.2);
-}
-
-.archive-info-kicker,
-.archive-info-data span {
-  color: #f1bdd5;
-
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
-
-.archive-info-code {
-  margin: 16px 0 0;
-
-  color: #ff63ab;
-
-  font-family: var(--font-vt323), monospace;
-  font-size: 42px;
-  line-height: 0.85;
-}
-
-.archive-info-panel h2 {
-  margin: 16px 0 0;
-
-  color: #ffffff;
-
-  font-family: var(--font-press-start), monospace;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5;
-}
-
-.archive-info-rule {
-  height: 2px;
-
-  margin: 16px 0;
-
-  background: var(--accent);
-}
-
-.archive-info-data {
-  display: grid;
-  align-content: start;
-  gap: 11px;
-}
-
-.archive-info-data div {
-  display: grid;
-  gap: 5px;
-}
-
-.archive-info-data strong {
-  color: #aef0cc;
-
-  font-family: var(--font-vt323), monospace;
-  font-size: 25px;
-  font-weight: 400;
-  line-height: 1;
-}
-
-.archive-info-data .archive-ready {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.archive-ready i {
-  width: 8px;
-  height: 8px;
-
-  border-radius: 50%;
-
-  background: var(--success);
-
-  box-shadow: 0 0 8px rgba(36, 200, 121, 0.8);
-}
-
-.archive-info-actions {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 7px;
-
-  align-self: end;
-
-  padding-top: 14px;
-}
-
-.archive-info-actions button {
-  min-width: 0;
-  min-height: 40px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 5px 3px;
-
-  background: #ffffff;
-  color: #493d48;
-
-  border: 1px solid #bdaab5;
-
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 8px;
-  font-weight: 800;
-  line-height: 1.1;
-  text-align: center;
-  white-space: normal;
-
-  cursor: pointer;
-}
-
-.archive-info-actions .archive-open-button {
-  background: var(--accent);
-  color: #ffffff;
-
-  border-color: #8d0a49;
-
-  font-family: var(--font-press-start), monospace;
-  font-size: 7px;
-
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.25);
-}
-
-/* ==========================================================
-   DRIVE SCENE + TRACK LIST
-========================================================== */
 
 .drive-body,
 .track-body {
@@ -885,6 +1023,7 @@ a {
 
   box-shadow: 4px 4px 0 rgba(35, 29, 41, 0.2);
 }
+
 /* ==========================================================
    TRACK PREVIEW
 ========================================================== */
@@ -1195,13 +1334,13 @@ a {
 }
 
 .loading-status-line {
-  opacity: 0.28;
   color: #b7a1ac;
+  opacity: 0.28;
 }
 
 .loading-status-line-active {
-  opacity: 1;
   color: #8adfba;
+  opacity: 1;
 }
 
 .loading-status-line p {
@@ -1256,7 +1395,7 @@ a {
 }
 
 /* ==========================================================
-   ENDING + GALLERY
+   ENDING + EMPTY GALLERY STATE
 ========================================================== */
 
 .ending-message-panel {
@@ -1526,191 +1665,16 @@ a {
 }
 
 /* ==========================================================
-   RESPONSIVE
-========================================================== */
-
-@media (max-width: 900px) {
-  .archive-grid-two,
-  .viewer-grid-two,
-  .archive-scene-content,
-  .track-preview-card {
-    grid-template-columns: 1fr;
-  }
-
-  .archive-scene-content {
-    overflow-y: auto;
-  }
-
-  .archive-disc-stage {
-    min-height: 370px;
-  }
-
-  .archive-info-panel {
-    min-height: 300px;
-  }
-
-  .archive-disc-slot .memory-disc-button {
-    width: min(245px, 64vw);
-  }
-}
-
-@media (max-width: 640px) {
-  .boot-scene,
-  .loading-scene,
-  .archive-scene,
-  .drive-scene,
-  .track-scene,
-  .ending-viewer,
-  .gallery-viewer {
-    display: block;
-
-    padding: 10px;
-
-    overflow: auto;
-  }
-
-  .archive-scene-shell {
-    height: calc(100dvh - 20px);
-  }
-
-  .opening-screen {
-    padding: 10px 10px 130px;
-  }
-
-  .game-window-body,
-  .drive-body,
-  .track-body,
-  .archive-scene-content {
-    gap: 16px;
-    padding: 14px;
-  }
-
-  .boot-console-body,
-  .loading-console-body,
-  .ending-body,
-  .gallery-body {
-    padding: 26px 18px;
-  }
-
-  .archive-scene-topbar,
-  .drive-topbar,
-  .track-topbar,
-  .game-windowbar,
-  .archive-scene-bar,
-  .drive-windowbar,
-  .track-windowbar,
-  .ending-windowbar,
-  .gallery-windowbar {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .game-windowbar-right,
-  .archive-scene-bar > span,
-  .drive-windowbar > span,
-  .track-windowbar > span,
-  .ending-windowbar > span,
-  .gallery-windowbar > span {
-    display: none;
-  }
-
-  .archive-stage-copy p,
-  .drive-intro p {
-    font-size: 26px;
-  }
-
-  .archive-stage-copy span,
-  .archive-open-hint,
-  .drive-intro span {
-    font-size: 12px;
-  }
-
-  .archive-info-actions button {
-    min-height: 38px;
-    font-size: 7px;
-  }
-
-  .archive-info-actions .archive-open-button {
-    font-size: 6px;
-  }
-
-  .drive-controls,
-  .track-controls,
-  .track-file-data {
-    grid-template-columns: 1fr;
-  }
-
-  .viewer-nav-dock {
-    right: 10px;
-    bottom: 10px;
-    left: 10px;
-
-    grid-template-columns: auto 1fr;
-    gap: 6px;
-
-    padding: 6px;
-  }
-
-  .viewer-nav-track {
-    justify-content: flex-end;
-  }
-
-  .viewer-nav-track strong {
-    display: none;
-  }
-
-  .viewer-nav-actions {
-    grid-column: 1 / -1;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .viewer-nav-dock button {
-    min-height: 34px;
-    font-size: 9px;
-  }
-}
-/* ==========================================================
-   Y2K PIXEL CURSOR
-========================================================== */
-
-html,
-body {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M3 2H7V5H10V8H13V11H16V14H20V18H16V22H13V29H9V22H6V19H3V2Z' fill='%23231d29'/%3E%3Cpath d='M5 4H7V7H10V10H13V13H16V16H12V20H11V27H10V20H7V17H5V4Z' fill='%23f8f6f2'/%3E%3Cpath d='M7 6H8V9H11V12H14V15H12V17H10V15H8V13H7V6Z' fill='%23d81c78'/%3E%3C/svg%3E") 3 3, auto;
-}
-
-button,
-a,
-[role="button"],
-.rsvp-button,
-.rsvp-modal-submit,
-.rsvp-modal-cancel,
-.rsvp-modal-close,
-.archive-info-actions button,
-.drive-button,
-.track-button,
-.viewer-nav-dock button,
-.location-map-link,
-.memory-disc-button,
-.drive-track-item {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M10 3H14V11H16V7H20V11H22V9H26V18H24V23H21V27H11V25H8V22H5V15H9V3H10Z' fill='%23231d29'/%3E%3Cpath d='M11 5H12V14H14V9H15V15H18V11H19V16H22V13H23V18H21V22H19V25H12V23H9V20H7V16H10V5H11Z' fill='%23f8f6f2'/%3E%3Cpath d='M12 6H13V15H15V12H16V17H19V14H20V18H22V19H20V22H18V24H13V22H10V19H9V17H11V6H12Z' fill='%23d81c78'/%3E%3C/svg%3E") 12 5, pointer;
-}
-
-input,
-textarea {
-  cursor: text;
-}
-/* ==========================================================
    AUDIO TOGGLE
 ========================================================== */
 
 .audio-toggle {
   position: fixed;
-  right: 18px;
-  bottom: 86px;
-  z-index: 90;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: max(14px, env(safe-area-inset-bottom));
+  z-index: 120;
 
+  max-width: calc(100vw - 28px);
   min-height: 34px;
 
   display: inline-flex;
@@ -1731,6 +1695,7 @@ textarea {
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.04em;
+  white-space: nowrap;
 
   cursor: pointer;
 }
@@ -1755,536 +1720,49 @@ textarea {
   box-shadow: 0 0 8px rgba(36, 200, 121, 0.85);
 }
 
-@media (max-width: 640px) {
-  .audio-toggle {
-    right: 10px;
-    bottom: 78px;
-
-    font-size: 9px;
-  }
-}
-/* ==========================================================
-   ARCHIVE DISC HINT + AUDIO POSITION FIX
-========================================================== */
-
-/* Chừa khoảng riêng cho CLICK DISC TO OPEN */
-.archive-disc-slot {
-  padding: 4px 0 24px;
-}
-
-.archive-disc-slot .memory-disc-wrap {
-  transform: translateY(-10px);
-}
-
-.archive-open-hint {
-  position: relative;
-  z-index: 3;
-
-  min-height: 24px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding-top: 4px;
-
-  background: var(--paper);
-}
-
-/* Audio toggle không chiếm layout, chỉ nổi trên viewport */
-.audio-toggle {
-  position: fixed;
-  right: max(14px, env(safe-area-inset-right));
-  bottom: max(14px, env(safe-area-inset-bottom));
-
-  z-index: 120;
-
-  max-width: calc(100vw - 28px);
-
-  white-space: nowrap;
-}
-
-/* Khi đang ở Viewer có nav dock dưới cùng, đẩy audio lên trên dock */
 .viewer-scene .audio-toggle {
   bottom: 86px;
 }
 
-@media (max-width: 640px) {
-  .archive-disc-slot .memory-disc-wrap {
-    transform: translateY(-4px);
-  }
-
-  .archive-disc-slot {
-    padding-bottom: 16px;
-  }
-
-  .viewer-scene .audio-toggle {
-    bottom: 78px;
-  }
-}
 /* ==========================================================
-   ARCHIVE SCENE
+   Y2K PIXEL CURSOR
 ========================================================== */
 
-.archive-screen {
-  min-height: 100dvh;
-  height: 100dvh;
-  padding: 28px;
-  overflow: hidden;
+html,
+body {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M3 2H7V5H10V8H13V11H16V14H20V18H16V22H13V29H9V22H6V19H3V2Z' fill='%23231d29'/%3E%3Cpath d='M5 4H7V7H10V10H13V13H16V16H12V20H11V27H10V20H7V17H5V4Z' fill='%23f8f6f2'/%3E%3Cpath d='M7 6H8V9H11V12H14V15H12V17H10V15H8V13H7V6Z' fill='%23d81c78'/%3E%3C/svg%3E") 3 3, auto;
 }
 
-.archive-shell {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  border: 2px solid #4a3d48;
-  background: #dfdbd7;
-  box-shadow:
-    0 0 0 3px #8b1a57,
-    10px 10px 0 rgba(20, 12, 24, 0.34);
+button,
+a,
+[role="button"],
+.rsvp-button,
+.rsvp-modal-submit,
+.rsvp-modal-cancel,
+.rsvp-modal-close,
+.archive-action-button,
+.drive-button,
+.track-button,
+.viewer-nav-dock button,
+.location-map-link,
+.memory-disc-button,
+.drive-track-item {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M10 3H14V11H16V7H20V11H22V9H26V18H24V23H21V27H11V25H8V22H5V15H9V3H10Z' fill='%23231d29'/%3E%3Cpath d='M11 5H12V14H14V9H15V15H18V11H19V16H22V13H23V18H21V22H19V25H12V23H9V20H7V16H10V5H11Z' fill='%23f8f6f2'/%3E%3Cpath d='M12 6H13V15H15V12H16V17H19V14H20V18H22V19H20V22H18V24H13V22H10V19H9V17H11V6H12Z' fill='%23d81c78'/%3E%3C/svg%3E") 12 5, pointer;
 }
 
-.archive-topbar {
-  height: 54px;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  background: #e11d7b;
-  border-bottom: 2px solid #6d0f3d;
-  color: #ffffff;
-  font-family: var(--font-press-start), monospace;
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.archive-main {
-  min-height: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) 420px;
-  gap: 24px;
-  padding: 24px;
-  align-items: stretch;
-}
-
-.archive-display-panel {
-  min-height: 0;
-  padding: 28px 28px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  border: 1px solid #847882;
-  background: #e6e3df;
-  box-shadow: inset 0 0 0 2px #f6f3f1;
-}
-
-.archive-panel-kicker {
-  margin: 0;
-  color: #b01260;
-  font-family: var(--font-press-start), monospace;
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.archive-panel-title {
-  margin: 24px 0 20px;
-  color: #241b2a;
-  font-family: var(--font-vt323), monospace;
-  font-size: clamp(26px, 2vw, 40px);
-  line-height: 1.1;
-  text-align: center;
-}
-
-.archive-disc-stage {
-  flex: 1;
-  width: 100%;
-  min-height: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 0;
-}
-
-.archive-panel-hint {
-  margin: 18px 0 0;
-  color: #b01260;
-  font-family: var(--font-press-start), monospace;
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-align: center;
-}
-
-.archive-blink {
-  animation: archiveBlink 1.1s steps(2, end) infinite;
-}
-
-@keyframes archiveBlink {
-  0%,
-  45% {
-    opacity: 1;
-  }
-
-  46%,
-  100% {
-    opacity: 0.35;
-  }
-}
-
-.archive-info-panel {
-  padding: 28px 24px 22px;
-  display: flex;
-  flex-direction: column;
-  background: #221929;
-  border: 1px solid #4f4450;
-  box-shadow:
-    6px 6px 0 rgba(18, 9, 24, 0.28),
-    inset 0 0 0 2px rgba(255, 255, 255, 0.04);
-}
-
-.archive-info-label {
-  margin: 0;
-  color: #fff6f8;
-  font-family: var(--font-press-start), monospace;
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.archive-info-code {
-  margin: 24px 0 8px;
-  color: #ff5ea8;
-  font-family: var(--font-vt323), monospace;
-  font-size: clamp(38px, 3vw, 58px);
-  line-height: 0.95;
-}
-
-.archive-info-title {
-  margin: 0;
-  color: #ffffff;
-  font-family: var(--font-press-start), monospace;
-  font-size: clamp(22px, 1.65vw, 32px);
-  line-height: 1.25;
-  word-break: break-word;
-}
-
-.archive-info-divider {
-  height: 2px;
-  margin: 22px 0 18px;
-  background: #e11d7b;
-}
-
-.archive-info-meta {
-  display: grid;
-  gap: 18px;
-}
-
-.archive-info-row {
-  display: grid;
-  gap: 10px;
-}
-
-.archive-info-row span {
-  color: #fff6f8;
-  font-family: var(--font-press-start), monospace;
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.archive-info-row strong {
-  color: #bdfde2;
-  font-family: var(--font-vt323), monospace;
-  font-size: 24px;
-  line-height: 1;
-  font-weight: 400;
-}
-
-.archive-ready {
-  color: #42f29e !important;
-}
-
-.archive-info-actions {
-  margin-top: auto;
-  padding-top: 22px;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.archive-action-button {
-  min-height: 52px;
-  padding: 10px 12px;
-  border: 2px solid #3b3340;
-  font-family: var(--font-press-start), monospace;
-  font-size: 11px;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition:
-    transform 0.14s ease,
-    filter 0.14s ease;
-}
-
-.archive-action-button:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.03);
-}
-
-.archive-action-button-light {
-  background: #f4f0ed;
-  color: #43384a;
-}
-
-.archive-action-button-primary {
-  background: #e11d7b;
-  border-color: #8f144d;
-  color: #ffffff;
-}
-
-.archive-bottombar {
-  min-height: 56px;
-  padding: 0 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  background: #241b2a;
-  border-top: 2px solid #e11d7b;
-  color: #fff7fa;
-  font-family: var(--font-press-start), monospace;
-  font-size: 11px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.archive-bottombar > div {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.archive-status-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #35f08a;
-  box-shadow: 0 0 10px rgba(53, 240, 138, 0.7);
+input,
+textarea {
+  cursor: text;
 }
 
 /* ==========================================================
-   MOBILE
+   RESPONSIVE
 ========================================================== */
 
 @media (max-width: 1100px) {
-  .archive-main {
-    grid-template-columns: 1fr;
-  }
-
-  .archive-info-panel {
-    box-shadow: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .archive-screen {
-    padding: 10px;
-  }
-
-  .archive-shell {
-    box-shadow:
-      0 0 0 2px #8b1a57,
-      4px 4px 0 rgba(20, 12, 24, 0.24);
-  }
-
-  .archive-topbar {
-    height: auto;
-    padding: 12px 14px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    font-size: 10px;
-  }
-
-  .archive-main {
-    padding: 12px;
-    gap: 12px;
-  }
-
-  .archive-display-panel,
-  .archive-info-panel {
-    padding: 18px 14px;
-  }
-
-  .archive-panel-kicker {
-    font-size: 11px;
-  }
-
-  .archive-panel-title {
-    margin: 16px 0 14px;
-    font-size: 22px;
-  }
-
-  .archive-panel-hint {
-    margin-top: 12px;
-    font-size: 10px;
-  }
-
-  .archive-info-label {
-    font-size: 10px;
-  }
-
-  .archive-info-code {
-    margin-top: 18px;
-    font-size: 34px;
-  }
-
-  .archive-info-title {
-    font-size: 18px;
-    line-height: 1.25;
-  }
-
-  .archive-info-row strong {
-    font-size: 20px;
-  }
-
-  .archive-info-actions {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
-  .archive-action-button {
-    min-height: 46px;
-    font-size: 10px;
-  }
-
-  .archive-bottombar {
-    padding: 12px 14px;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 8px;
-    font-size: 9px;
-  }
-
-  .archive-bottombar > div {
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-}
-
-@media (max-width: 480px) {
-  .archive-panel-title {
-    font-size: 18px;
-  }
-
-  .archive-info-code {
-    font-size: 30px;
-  }
-
-  .archive-info-title {
-    font-size: 16px;
-  }
-
-  .archive-info-row strong {
-    font-size: 18px;
-  }
-}
-/* ==========================================================
-   ARCHIVE ACTION BUTTONS — FINAL FIX
-========================================================== */
-
-.archive-info-actions {
-  width: 100%;
-
-  display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 10px !important;
-
-  align-items: stretch;
-}
-
-.archive-info-actions .archive-action-button {
-  width: 100%;
-  min-width: 0;
-  min-height: 50px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 8px 6px;
-
-  border: 2px solid #3b3340;
-
-  font-family: var(--font-press-start), monospace;
-  font-size: 9px;
-  line-height: 1.25;
-  text-align: center;
-  white-space: nowrap;
-
-  cursor: pointer;
-}
-
-.archive-info-actions .archive-action-button-light {
-  background: #f4f0ed !important;
-  color: #43384a !important;
-
-  border-color: #3b3340 !important;
-}
-
-.archive-info-actions .archive-action-button-primary {
-  background: #e11d7b !important;
-  color: #ffffff !important;
-
-  border-color: #8f144d !important;
-
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.24);
-}
-
-.archive-info-actions .archive-action-button-primary:hover {
-  background: #b90f5d !important;
-}
-
-@media (max-width: 768px) {
-  .archive-info-actions {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 7px !important;
-  }
-
-  .archive-info-actions .archive-action-button {
-    min-height: 42px;
-    padding: 6px 3px;
-
-    font-size: 7px;
-  }
-}
-
-@media (max-width: 420px) {
-  .archive-info-actions {
-    grid-template-columns: 1fr !important;
-  }
-
-  .archive-info-actions .archive-action-button {
-    min-height: 44px;
-    font-size: 8px;
-  }
-}
-/* ==========================================================
-   ARCHIVE MOBILE — LAYOUT FIX
-========================================================== */
-
-@media (max-width: 768px) {
   .archive-screen {
     height: auto;
     min-height: 100dvh;
-
-    padding: 10px;
 
     overflow-x: hidden;
     overflow-y: auto;
@@ -2292,7 +1770,7 @@ textarea {
 
   .archive-shell {
     height: auto;
-    min-height: calc(100dvh - 20px);
+    min-height: calc(100dvh - 56px);
 
     grid-template-rows: auto auto auto;
 
@@ -2300,26 +1778,89 @@ textarea {
   }
 
   .archive-main {
-    display: grid;
     grid-template-columns: 1fr;
-
-    min-height: 0;
-
-    padding: 12px;
-    gap: 14px;
 
     overflow: visible;
   }
 
-  .archive-display-panel {
-    min-height: 0;
+  .archive-info-panel {
+    min-height: 360px;
+  }
 
+  .archive-disc-stage .memory-disc-button {
+    width: min(290px, 46vw);
+  }
+}
+
+@media (max-width: 900px) {
+  .archive-grid-two,
+  .viewer-grid-two,
+  .track-preview-card {
+    grid-template-columns: 1fr;
+  }
+
+  .track-preview-card {
+    grid-template-columns: 1fr;
+  }
+
+  .track-artwork {
+    width: 100%;
+    max-width: 250px;
+
+    margin: 0 auto;
+  }
+
+  .archive-info-actions {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .boot-scene,
+  .loading-scene,
+  .drive-scene,
+  .track-scene,
+  .ending-viewer {
+    display: block;
+
+    padding: 10px;
+
+    overflow: auto;
+  }
+
+  .archive-screen {
+    padding: 10px;
+  }
+
+  .archive-shell {
+    min-height: calc(100dvh - 20px);
+  }
+
+  .archive-topbar {
+    min-height: auto;
+
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+
+    padding: 12px 14px;
+
+    font-size: 10px;
+    line-height: 1.45;
+  }
+
+  .archive-main {
     display: grid;
-    grid-template-rows: auto auto 250px auto;
+    grid-template-columns: 1fr;
+    gap: 14px;
+
+    padding: 12px;
+  }
+
+  .archive-display-panel {
+    grid-template-rows: auto auto 245px auto;
 
     padding: 18px 14px 16px;
-
-    overflow: hidden;
   }
 
   .archive-panel-kicker {
@@ -2334,46 +1875,20 @@ textarea {
   }
 
   .archive-disc-stage {
-    width: 100%;
-    min-height: 0;
-    height: 250px;
-
-    display: grid;
-    place-items: center;
+    height: 245px;
+    min-height: 245px;
 
     padding: 0;
-
-    overflow: hidden;
-  }
-
-  .archive-disc-stage .memory-disc-wrap {
-    width: auto;
-    height: auto;
-
-    display: flex;
-
-    transform: none !important;
   }
 
   .archive-disc-stage .memory-disc-button {
-    width: min(220px, 58vw);
-
-    transform: none !important;
-  }
-
-  .archive-disc-stage .memory-disc {
-    translate: 0 0 !important;
+    width: min(210px, 56vw);
   }
 
   .archive-panel-hint {
-    position: static;
+    min-height: 20px;
 
-    min-height: auto;
-
-    margin: 8px 0 0;
-    padding: 0;
-
-    background: transparent;
+    margin-top: 8px;
 
     font-size: 9px;
   }
@@ -2381,11 +1896,11 @@ textarea {
   .archive-info-panel {
     min-height: auto;
 
-    display: flex;
-
     padding: 18px 14px;
+  }
 
-    overflow: visible;
+  .archive-info-label {
+    font-size: 10px;
   }
 
   .archive-info-code {
@@ -2420,33 +1935,32 @@ textarea {
   }
 
   .archive-info-actions {
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-
-    width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
 
     margin-top: 18px;
     padding-top: 0;
-    gap: 6px;
   }
 
-  .archive-info-actions .archive-action-button {
-    min-height: 42px;
+  .archive-action-button {
+    min-height: 43px;
 
     padding: 5px 2px;
 
     font-size: 6px;
-    line-height: 1.2;
-    white-space: normal;
+    line-height: 1.15;
+    white-space: nowrap;
   }
 
   .archive-bottombar {
     min-height: auto;
 
-    padding: 14px;
-
     align-items: flex-start;
     flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 14px;
 
     font-size: 8px;
     line-height: 1.5;
@@ -2459,7 +1973,101 @@ textarea {
     gap: 8px;
   }
 
-  .audio-toggle {
+  .opening-screen {
+    padding: 10px 10px 130px;
+  }
+
+  .game-window-body,
+  .drive-body,
+  .track-body {
+    gap: 16px;
+    padding: 14px;
+  }
+
+  .boot-console-body,
+  .loading-console-body,
+  .ending-body,
+  .gallery-body {
+    padding: 26px 18px;
+  }
+
+  .drive-topbar,
+  .track-topbar,
+  .game-windowbar,
+  .drive-windowbar,
+  .track-windowbar,
+  .ending-windowbar,
+  .gallery-windowbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .game-windowbar-right,
+  .drive-windowbar > span,
+  .track-windowbar > span,
+  .ending-windowbar > span,
+  .gallery-windowbar > span {
+    display: none;
+  }
+
+  .drive-intro p {
+    font-size: 26px;
+  }
+
+  .drive-intro span {
+    font-size: 12px;
+  }
+
+  .drive-controls,
+  .track-controls,
+  .track-file-data {
+    grid-template-columns: 1fr;
+  }
+
+  .drive-footer,
+  .track-footer,
+  .ending-footer,
+  .gallery-footer,
+  .game-footer,
+  .boot-console-footer,
+  .loading-console-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .viewer-nav-dock {
+    right: 10px;
+    bottom: 10px;
+    left: 10px;
+
+    grid-template-columns: auto 1fr;
+    gap: 6px;
+
+    padding: 6px;
+  }
+
+  .viewer-nav-track {
+    justify-content: flex-end;
+  }
+
+  .viewer-nav-track strong {
+    display: none;
+  }
+
+  .viewer-nav-actions {
+    grid-column: 1 / -1;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .viewer-nav-dock button {
+    min-height: 34px;
+    font-size: 9px;
+  }
+
+  .audio-toggle,
+  .viewer-scene .audio-toggle {
     right: 12px;
     bottom: 12px;
 
@@ -2471,22 +2079,182 @@ textarea {
 
 @media (max-width: 420px) {
   .archive-display-panel {
-    grid-template-rows: auto auto 220px auto;
+    grid-template-rows: auto auto 225px auto;
   }
 
   .archive-disc-stage {
-    height: 220px;
+    height: 225px;
+    min-height: 225px;
   }
 
   .archive-disc-stage .memory-disc-button {
-    width: min(195px, 56vw);
+    width: min(190px, 54vw);
   }
 
   .archive-panel-title {
     font-size: 21px;
   }
 
-  .archive-info-actions .archive-action-button {
+  .archive-info-actions {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .archive-action-button {
+    min-height: 40px;
     font-size: 5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .archive-blink,
+  .gallery-loader span {
+    animation: none;
+  }
+}
+/* ==========================================================
+   ARCHIVE DESKTOP — LOCK INFO PANEL HEIGHT
+========================================================== */
+
+@media (min-width: 769px) {
+  .archive-shell {
+    grid-template-rows: 54px minmax(0, 1fr) 56px;
+  }
+
+  .archive-main {
+    padding: 18px 24px;
+    overflow: hidden;
+  }
+
+  .archive-info-panel {
+    display: grid;
+    grid-template-rows:
+      auto
+      auto
+      auto
+      auto
+      minmax(0, 1fr)
+      auto;
+
+    min-height: 0;
+
+    padding: 20px 24px 18px;
+
+    overflow: hidden;
+  }
+
+  .archive-info-code {
+    margin: 16px 0 7px;
+  }
+
+  .archive-info-title {
+    font-size: clamp(19px, 1.5vw, 28px);
+    line-height: 1.22;
+  }
+
+  .archive-info-divider {
+    margin: 16px 0;
+  }
+
+  .archive-info-meta {
+    align-content: start;
+    gap: 12px;
+
+    min-height: 0;
+  }
+
+  .archive-info-row {
+    gap: 7px;
+  }
+
+  .archive-info-row strong {
+    font-size: 22px;
+  }
+
+  .archive-info-actions {
+    align-self: end;
+
+    margin-top: 0;
+    padding-top: 14px;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .archive-action-button {
+    min-height: 44px;
+
+    padding: 6px 4px;
+
+    font-size: 8px;
+    line-height: 1.15;
+  }
+}
+/* ==========================================================
+   ARCHIVE DISC HINT — KEEP BELOW DISC
+========================================================== */
+
+.archive-display-panel {
+  grid-template-rows: auto auto minmax(0, 1fr) 32px;
+}
+
+.archive-disc-stage {
+  align-self: stretch;
+
+  padding: 8px 0 20px;
+}
+
+.archive-disc-stage .memory-disc-button {
+  width: min(290px, 26vw);
+}
+
+.archive-panel-hint {
+  position: relative;
+  z-index: 5;
+
+  align-self: end;
+
+  min-height: 32px;
+  margin: 0;
+  padding-top: 7px;
+
+  background: #e6e3df;
+
+  line-height: 1.2;
+}
+
+@media (max-width: 1100px) {
+  .archive-disc-stage .memory-disc-button {
+    width: min(270px, 42vw);
+  }
+}
+
+@media (max-width: 768px) {
+  .archive-display-panel {
+    grid-template-rows: auto auto 245px 28px;
+  }
+
+  .archive-disc-stage {
+    padding: 0 0 14px;
+  }
+
+  .archive-disc-stage .memory-disc-button {
+    width: min(205px, 55vw);
+  }
+
+  .archive-panel-hint {
+    min-height: 28px;
+    padding-top: 5px;
+
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 420px) {
+  .archive-display-panel {
+    grid-template-rows: auto auto 225px 26px;
+  }
+
+  .archive-disc-stage .memory-disc-button {
+    width: min(185px, 53vw);
   }
 }
