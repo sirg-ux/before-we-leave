@@ -375,51 +375,200 @@
 }
 
 @media (max-width: 640px) {
-  .gallery-lightbox {
-    padding: 14px;
-  }
+  /* ==========================================================
+   PHOTO LIGHTBOX
+========================================================== */
 
-  .gallery-lightbox-close {
-    top: 12px;
-    right: 12px;
-  }
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
 
-  .gallery-admin-page {
-    padding: 10px;
-  }
+  display: grid;
+  place-items: center;
 
-  .gallery-admin-body {
-    padding: 20px 14px;
-  }
+  padding: 24px;
 
-  .gallery-admin-bar {
-    font-size: 9px;
-  }
+  background: rgba(10, 8, 13, 0.88);
 }
-.gallery-admin-list-tools {
+
+.gallery-lightbox-window {
+  width: min(1100px, 100%);
+  max-height: calc(100dvh - 48px);
+
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+
+  overflow: hidden;
+
+  background: var(--panel-dark);
+
+  border: 2px solid #ffffff;
+  outline: 2px solid var(--accent);
+
+  box-shadow:
+    10px 10px 0 rgba(0, 0, 0, 0.45),
+    0 0 0 5px rgba(216, 28, 120, 0.18);
+}
+
+.gallery-lightbox-bar {
+  min-height: 42px;
+
   display: flex;
   align-items: center;
-  gap: 10px;
-}
+  justify-content: space-between;
+  gap: 14px;
 
-.gallery-admin-list-tools button {
-  min-height: 28px;
+  padding: 10px 14px;
 
-  padding: 5px 8px;
-
-  background: transparent;
+  background: var(--accent);
   color: #ffffff;
 
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 2px solid #5f0832;
 
   font-family: var(--font-geist-mono), monospace;
-  font-size: 9px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.gallery-lightbox-stage {
+  min-height: 0;
+
+  display: grid;
+  place-items: center;
+
+  overflow: auto;
+
+  padding: 24px;
+
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    #100c14;
+
+  background-size: 28px 28px;
+}
+
+.gallery-lightbox-image {
+  display: block;
+
+  max-width: 100%;
+  max-height: calc(100dvh - 180px);
+
+  object-fit: contain;
+
+  border: 2px solid #ffffff;
+
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.35);
+
+  transform-origin: center;
+  transition: transform 0.18s ease;
+}
+
+.gallery-lightbox-controls {
+  min-height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+
+  padding: 8px 10px;
+
+  background: var(--paper);
+
+  border-top: 2px solid var(--accent);
+}
+
+.gallery-lightbox-zoom,
+.gallery-lightbox-actions {
+  display: flex;
+  gap: 7px;
+}
+
+.gallery-lightbox-controls button {
+  min-height: 38px;
+
+  padding: 7px 11px;
+
+  background: #ffffff;
+  color: var(--ink);
+
+  border: 1px solid #aaa0ac;
+
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
   font-weight: 800;
 
   cursor: pointer;
 }
 
-.gallery-admin-list-tools button:hover {
-  background: var(--accent);
+.gallery-lightbox-controls button:hover:not(:disabled) {
+  background: var(--accent-soft);
   border-color: var(--accent);
+}
+
+.gallery-lightbox-controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.gallery-download-button {
+  background: var(--accent) !important;
+  color: #ffffff !important;
+
+  border-color: #8d0a49 !important;
+
+  font-family: var(--font-press-start), monospace !important;
+  font-size: 8px !important;
+}
+
+.gallery-close-button {
+  background: var(--panel-dark) !important;
+  color: #ffffff !important;
+
+  border-color: var(--panel-dark) !important;
+}
+
+@media (max-width: 640px) {
+  .gallery-lightbox {
+    padding: 10px;
+  }
+
+  .gallery-lightbox-window {
+    max-height: calc(100dvh - 20px);
+  }
+
+  .gallery-lightbox-stage {
+    padding: 14px;
+  }
+
+  .gallery-lightbox-image {
+    max-height: calc(100dvh - 190px);
+  }
+
+  .gallery-lightbox-controls {
+    align-items: stretch;
+    flex-direction: column;
+
+    padding: 8px;
+  }
+
+  .gallery-lightbox-zoom,
+  .gallery-lightbox-actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .gallery-lightbox-actions {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .gallery-lightbox-controls button {
+    min-height: 40px;
+    padding: 6px;
+    font-size: 9px;
+  }
+}
 }

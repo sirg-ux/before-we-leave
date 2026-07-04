@@ -13,6 +13,8 @@ export default function GalleryViewer() {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedPhoto, setSelectedPhoto] =
     useState<GalleryPhoto | null>(null);
+  const [zoom, setZoom] = useState(1);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   useEffect(() => {
     async function loadGallery() {
@@ -33,6 +35,48 @@ export default function GalleryViewer() {
 
     void loadGallery();
   }, []);
+
+  function openPhoto(photo: GalleryPhoto) {
+    setSelectedPhoto(photo);
+    setZoom(1);
+  }
+
+  function closePhoto() {
+    setSelectedPhoto(null);
+    setZoom(1);
+  }
+
+  function zoomIn() {
+    setZoom((current) => Math.min(current + 0.25, 2.5));
+  }
+
+  function zoomOut() {
+    setZoom((current) => Math.max(current - 0.25, 0.75));
+  }
+
+  async function downloadPhoto() {
+    if (!selectedPhoto) return;
+
+    try {
+      setIsDownloading(true);
+
+      const response = await fetch(selectedPhoto.url);
+      const blob = await response.blob();
+
+      const objectUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.href = objectUrl;
+      link.download = selectedPhoto.name;
+      document.body.appendChild(link);
+      link.click();
+
+      link.remove();
+      URL.revokeObjectURL(objectUrl);
+    } finally {
+      setIsDownloading(false);
+    }
+  }
 
   return (
     <main className="gallery-viewer">
@@ -119,7 +163,7 @@ export default function GalleryViewer() {
                     key={photo.name}
                     type="button"
                     className="gallery-photo-card"
-                    onClick={() => setSelectedPhoto(photo)}
+                    onClick={() => openPhoto(photo)}
                   >
                     <img
                       src={photo.url}
@@ -165,23 +209,81 @@ export default function GalleryViewer() {
           role="presentation"
           onMouseDown={(event) => {
             if (event.target === event.currentTarget) {
-              setSelectedPhoto(null);
+              closePhoto();
             }
           }}
         >
-          <button
-            type="button"
-            className="gallery-lightbox-close"
-            onClick={() => setSelectedPhoto(null)}
+          <div
+            className="gallery-lightbox-window"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Photo viewer"
           >
-            ×
-          </button>
+            <header className="gallery-lightbox-bar">
+              <span>PHOTO-VIEWER.EXE</span>
 
-          <img
-            src={selectedPhoto.url}
-            alt="Graduation memory preview"
-            className="gallery-lightbox-image"
-          />
+              <span>
+                {Math.round(zoom * 100)}%
+              </span>
+            </header>
+
+            <div className="gallery-lightbox-stage">
+              <img
+                src={selectedPhoto.url}
+                alt="Graduation memory preview"
+                className="gallery-lightbox-image"
+                style={{
+                  transform: `scale(${zoom})`,
+                }}
+              />
+            </div>
+
+            <footer className="gallery-lightbox-controls">
+              <div className="gallery-lightbox-zoom">
+                <button
+                  type="button"
+                  onClick={zoomOut}
+                  disabled={zoom <= 0.75}
+                >
+                  −
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setZoom(1)}
+                >
+                  100%
+                </button>
+
+                <button
+                  type="button"
+                  onClick={zoomIn}
+                  disabled={zoom >= 2.5}
+                >
+                  +
+                </button>
+              </div>
+
+              <div className="gallery-lightbox-actions">
+                <button
+                  type="button"
+                  className="gallery-download-button"
+                  onClick={() => void downloadPhoto()}
+                  disabled={isDownloading}
+                >
+                  {isDownloading ? "SAVING..." : "DOWNLOAD"}
+                </button>
+
+                <button
+                  type="button"
+                  className="gallery-close-button"
+                  onClick={closePhoto}
+                >
+                  CLOSE ×
+                </button>
+              </div>
+            </footer>
+          </div>
         </div>
       )}
     </main>
