@@ -600,3 +600,173 @@
     font-size: 23px;
   }
 }
+/* ==========================================================
+   RSVP — PHONE FIT FIX
+========================================================== */
+
+.archive-rsvp,
+.rsvp-body,
+.rsvp-copy,
+.rsvp-actions,
+.rsvp-modal,
+.rsvp-modal-body,
+.rsvp-fields,
+.rsvp-fields label {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.archive-rsvp {
+  width: 100%;
+}
+
+.rsvp-modal-backdrop {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.rsvp-modal {
+  width: min(700px, calc(100vw - 24px));
+  max-height: calc(100dvh - 24px);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.rsvp-modal-body,
+.rsvp-success {
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.rsvp-fields input {
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  .rsvp-body {
+    grid-template-columns: minmax(0, 1fr);
+
+    width: 100%;
+    gap: 18px;
+    padding: 18px 16px;
+  }
+
+  .rsvp-chip {
+    max-width: 100%;
+
+    font-size: 10px;
+    line-height: 1.3;
+    white-space: normal;
+  }
+
+  .rsvp-title {
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .rsvp-text {
+    font-size: 23px;
+    line-height: 1.05;
+  }
+
+  .rsvp-note {
+    font-size: 9px;
+    line-height: 1.45;
+  }
+
+  .rsvp-actions {
+    width: 100%;
+  }
+
+  .rsvp-button {
+    width: 100%;
+    min-height: 50px;
+
+    font-size: 7px;
+  }
+
+  .rsvp-status {
+    min-height: 34px;
+
+    font-size: 8px;
+    line-height: 1.35;
+  }
+
+  .rsvp-modal-backdrop {
+    place-items: start center;
+
+    padding: 12px;
+  }
+
+  .rsvp-modal {
+    width: calc(100vw - 24px);
+    max-height: calc(100dvh - 24px);
+  }
+
+  .rsvp-modal-bar {
+    min-height: 46px;
+
+    padding: 8px 11px;
+
+    font-size: 9px;
+  }
+
+  .rsvp-modal-body {
+    gap: 18px;
+
+    padding: 20px 15px 24px;
+  }
+
+  .rsvp-modal-heading > p {
+    font-size: 10px;
+  }
+
+  .rsvp-modal-heading h2 {
+    font-size: 19px;
+    line-height: 1.5;
+  }
+
+  .rsvp-modal-heading > span {
+    font-size: 22px;
+  }
+
+  .rsvp-console-status > div {
+    padding: 11px;
+  }
+
+  .rsvp-console-status span {
+    font-size: 8px;
+  }
+
+  .rsvp-console-status strong {
+    font-size: 19px;
+  }
+
+  .rsvp-fields input {
+    min-height: 48px;
+
+    padding: 0 12px;
+
+    font-size: 23px;
+  }
+
+  .rsvp-modal-actions {
+    position: sticky;
+    bottom: -24px;
+
+    padding: 12px 0 2px;
+
+    background: var(--paper);
+  }
+
+  .rsvp-modal-cancel,
+  .rsvp-modal-submit {
+    min-height: 46px;
+  }
+
+  .rsvp-modal-submit {
+    font-size: 7px;
+  }
+}
