@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type WheelEvent,
+  type TouchEvent,
+} from "react";
 
 const endingText = `Thank you for being part
 of these unforgettable years.
@@ -18,23 +24,44 @@ See you on Graduation Day. ♡`;
 
 export default function EndingViewer() {
   const [display, setDisplay] = useState("");
+  const [isComplete, setIsComplete] = useState(false);
+
+  const scrollRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     let index = 0;
+    let frameId = 0;
 
     const timer = window.setInterval(() => {
       index += 1;
       setDisplay(endingText.slice(0, index));
 
+      frameId = window.requestAnimationFrame(() => {
+        if (scrollRef.current) {
+          scrollRef.current.scrollTop =
+            scrollRef.current.scrollHeight;
+        }
+      });
+
       if (index >= endingText.length) {
         window.clearInterval(timer);
+        setIsComplete(true);
       }
-    }, 18);
+    }, 24);
 
     return () => {
       window.clearInterval(timer);
+      window.cancelAnimationFrame(frameId);
     };
   }, []);
+
+  function blockManualScroll(
+    event: WheelEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>,
+  ) {
+    if (!isComplete) {
+      event.preventDefault();
+    }
+  }
 
   return (
     <main className="ending-viewer">
@@ -54,9 +81,7 @@ export default function EndingViewer() {
 
             <h1>THANK YOU</h1>
 
-            <p>
-              Graduation Archive / Before We Leave
-            </p>
+            <p>Graduation Archive / Before We Leave</p>
           </header>
 
           <section className="ending-message-panel">
@@ -65,14 +90,37 @@ export default function EndingViewer() {
 
               <span className="ending-message-status">
                 <i />
-                PLAYING
+                {isComplete ? "COMPLETE" : "PLAYING"}
               </span>
             </div>
 
-            <pre>
-              {display}
-              <span className="ending-cursor">_</span>
-            </pre>
+            <div
+              ref={scrollRef}
+              className={`ending-message-scroll ${
+                isComplete ? "ending-message-scroll-ready" : ""
+              }`}
+              onWheel={blockManualScroll}
+              onTouchMove={blockManualScroll}
+            >
+              <pre>
+                {display}
+                {!isComplete && (
+                  <span className="ending-cursor">_</span>
+                )}
+              </pre>
+            </div>
+
+            {!isComplete && (
+              <div className="ending-autoscroll-label">
+                AUTO PLAYING · PLEASE STAND BY
+              </div>
+            )}
+
+            {isComplete && (
+              <div className="ending-autoscroll-label ending-read-label">
+                ARCHIVE COMPLETE · SCROLL TO REVIEW
+              </div>
+            )}
           </section>
 
           <div className="ending-signoff">
