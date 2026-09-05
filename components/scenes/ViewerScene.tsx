@@ -7,6 +7,7 @@ import { useCurrentArchive } from "@/hooks/useCurrentArchive";
 import { useSound } from "@/hooks/useSound";
 
 import OpeningViewer from "@/components/viewer/OpeningViewer";
+import GraduationOpeningViewer from "@/components/viewer/GraduationOpeningViewer";
 import GalleryViewer from "@/components/viewer/GalleryViewer";
 import EndingViewer from "@/components/viewer/EndingViewer";
 
@@ -77,6 +78,9 @@ export default function ViewerScene() {
       case "opening":
         return <OpeningViewer />;
 
+      case "graduation-opening":
+        return <GraduationOpeningViewer />;
+
       case "gallery":
         return <GalleryViewer />;
 
@@ -97,7 +101,10 @@ export default function ViewerScene() {
         {renderViewer()}
       </section>
 
-      <nav className="viewer-nav-dock" aria-label="Memory navigation">
+      <nav
+        className="viewer-nav-dock"
+        aria-label="Memory navigation"
+      >
         <button
           type="button"
           className="viewer-nav-drive"
@@ -117,11 +124,17 @@ export default function ViewerScene() {
         </div>
 
         <div className="viewer-nav-actions">
-          <button type="button" onClick={goPrevious}>
+          <button
+            type="button"
+            onClick={goPrevious}
+          >
             ← PREV
           </button>
 
-          <button type="button" onClick={goNext}>
+          <button
+            type="button"
+            onClick={goNext}
+          >
             NEXT →
           </button>
         </div>
